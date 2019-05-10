@@ -16,6 +16,9 @@
 	<script>
 	//jQuery require
 	let $ = jQuery = require('jquery');
+	//IPC Messages
+	const ipc = require('electron').ipcRenderer;
+	
 	
 	//Create user object
 	const accountType = require('electron').remote.getGlobal('accountType'); // Get account type
@@ -47,7 +50,7 @@
         	  	<h1 id="welcome" class="title-left">dwwd</h1>
 			  </div>
 	          <div class="col">
-        	  	<h1 class="title-right"><button class="btn btn-large btn-default">Logout</button></h1>
+        	  	<h1 class="title-right" id="logout-btn"><button class="btn btn-large btn-default">Logout</button></h1>
 			  </div>
           </div>
 		  
@@ -68,8 +71,9 @@
     </div>
   </body>
   <script>
-  	  //Load welcome message
+  	  //Load welcome message and inital content
       $('#welcome').text("Welcome "+username);
+	  $( "#content" ).load("views/show-courses.html");
 	  
 	  //Load corresponding side navigation bar
 	  jQuery.ajaxSetup({async:false});
@@ -99,6 +103,12 @@
 	      this.className += " active";
 	    });
 	  }
+	  
+	  //On log out click
+      $('#logout-btn').on('click', () => {
+	  	ipc.sendSync('logout');
+      });
+	  
 	  
 	  
   </script>

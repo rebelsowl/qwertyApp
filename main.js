@@ -4,7 +4,7 @@ const {app, BrowserWindow, ipcMain} = require('electron')
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
-let child
+let login
 
 function createMainWindow () {
 
@@ -63,13 +63,20 @@ function createLoginWindow () {
 
 
 
-//--- ON MESSAGE --//
+//--- ON LOGIN --//
 ipcMain.on('entry-accepted', (event, arg, arg2) => {
-	global.accountType = arg;
-	global.username = arg2;
+	global.accountType = arg
+	global.username = arg2
 	login.hide()
     createMainWindow()
 })
+
+//--- ON LOGOUT --//
+ipcMain.on('logout', (event) => {	
+	mainWindow.close()
+	createLoginWindow()
+})
+
 
 
 // This method will be called when Electron has finished
@@ -87,7 +94,7 @@ app.on('window-all-closed', function () {
 app.on('activate', function () {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) createWindow()
+  if (mainWindow === null) createMainWindow()
   if (mainWindow === null) {
     createMainWindow()
   }
