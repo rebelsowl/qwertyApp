@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    
+</head>
+<body>
+    <div class="container">
+        <br/>
+        <div class="form-group">
+            <label for="usr">User Name:</label>
+            <input type="text" class="form-control" id="txtUsr">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="txtPwd">
+        </div>
+        <button class="btn btn-default" id="btn-login">Login</button>
+        <label  id="lbl"></label>
+    </div>
+    <script>
+		
+        let $ = require('jquery')
+		const ipc = require('electron').ipcRenderer;
+		
+		
+		//DBHandler object
+		let DBHandlerClass = require('./DBHandler.js');
+		let DBHandler = new DBHandlerClass();
+			
+            $('#btn-login').on('click', () => {
+				//Get inputs
+                let txtUser=$('#txtUsr').val();
+                let txtPwd=$('#txtPwd').val();
+				let result = DBHandler.loginDB(txtUser,txtPwd);
+				result.then(function(returnedValue) {
+				  if (returnedValue == 1){
+					  ipc.sendSync('entry-accepted', 'ContentManager');
+				  } else if (returnedValue == 2){
+					  ipc.sendSync('entry-accepted', 'WebAdmin');
+				  } else {
+					  $('#lbl').text('username or password is incorrect');
+				  }
+				});
+            }) 
+    </script>
+</body>
+</html>
