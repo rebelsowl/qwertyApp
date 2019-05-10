@@ -64,8 +64,9 @@ function createLoginWindow () {
 
 
 //--- ON MESSAGE --//
-ipcMain.on('entry-accepted', (event, arg) => {
+ipcMain.on('entry-accepted', (event, arg, arg2) => {
 	global.accountType = arg;
+	global.username = arg2;
 	login.hide()
     createMainWindow()
 })

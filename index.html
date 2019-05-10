@@ -18,8 +18,10 @@
 	let $ = jQuery = require('jquery');
 	
 	//Create user object
-	const foo = require('electron').remote.getGlobal('accountType'); // Get account type
-	console.log(foo);
+	const accountType = require('electron').remote.getGlobal('accountType'); // Get account type
+	const username = require('electron').remote.getGlobal('username'); // Get account type
+	console.log(accountType);
+	console.log(username);
 	
 	//DBHandler object
 	var DBHandlerClass = require('./src/DBHandler.js');

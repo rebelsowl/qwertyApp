@@ -27,18 +27,20 @@ module.exports = class DBHandler {
 		// Perform a query
 		let $query = 'SELECT * FROM Accounts WHERE username = "'+username+'" AND password = "'+password+'"';
 		
-	    var res = connection.promise().query($query)
+	    var queryPromise = connection.promise().query($query)
 	    .then( ([rows,fields]) => {
+			let result = [];
 			if (rows.length == 1){
-				return rows[0]["account_type"];
+				result.push(rows[0]["account_type"]);
+				result.push(rows[0]["username"]);
 			} else  {
-				return 3;
+				result.push(3);
 			}
-				
+			return result;
 	    })
 	    .catch(console.log);
 		
-		return res;
+		return queryPromise;
 				
 	}
 
