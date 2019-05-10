@@ -44,7 +44,11 @@
 				  } else if (returnedValue == 2){
 					  ipc.sendSync('entry-accepted', 'WebAdmin');
 				  } else {
-					  $('#lbl').text('username or password is incorrect');
+					  alert('Username or Password is Incorrect!')
+					  //Clear inputs
+					  $('#txtUsr').val("");
+					  $('#txtPwd').val("");
+					  
 				  }
 				});
             }) 
