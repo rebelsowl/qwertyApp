@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/furkansahin55/qwertyApp",
+  "repository": "https://github.com/rebelsowl/qwertyApp",
   "keywords": [
     "Electron",
     "quick",
@@ -17,9 +17,7 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-<<<<<<< Updated upstream
-    "electron": "^5.0.0"
-=======
+    "electron": "^5.0.0",
     "electron": "^4.0.7"
   },
   "dependencies": {
@@ -29,6 +27,5 @@
     "mysql2": "^1.6.5",
     "sync-mysql": "^3.0.1",
     "util": "^0.12.0"
->>>>>>> Stashed changes
   }
 }
