@@ -1,15 +1,27 @@
           <div class="pane-form">			  
 			<form>
 			  <div class="form-group">
-			    <label>Username</label>
-			    <input name="username" type="input" class="form-control" placeholder="Username">
+			    <label>Event</label>
+			    <select name="event" class="form-control"> <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! BURAYI  DB YLE UYUMLU HALE GETIR                -->
+			    	<option selected value="Event 1">Event 1</option>
+			    	<option value="Event 2">Event 2</option>
+			    </select>
 			  </div>
 			  <div class="form-group">
-			    <label>Password</label>
-			    <input name="password" type="password" class="form-control" placeholder="Password">
+			    <label>Email List</label>
+			    <select name="emaillist" class="form-control"> <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! BURDA NAME CONVENTIONLARI KARARLASTIR          -->
+			    	<option selected value="Event 2">1st Grade</option>
+			    	<option value="Event 2">2st Grade</option>
+			    	<option value="Event 2">3st Grade</option>
+			    	<option value="Event 2">4st Grade</option>
+			    	<option value="Event 2">Asistants</option>
+			    	<option value="Event 2">Instructors</option>
+			    	<option value="Event 2">Yuksek lisans</option>
+			    	<option value="Event 2">Bı sey daha var dı</option>
+			    </select>
 			  </div>
 			  <div class="form-actions">
-			    <button id="form-button" type="submit" class="btn btn-form btn-primary" onClick="render.addcontentmanager()">OK</button>
+			    <button id="form-button" type="submit" class="btn btn-form btn-primary" onClick="render.sendEvent()">Send Event</button>
 			  </div>
 			</form>
           </div>
