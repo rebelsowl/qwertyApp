@@ -1,7 +1,6 @@
 
 //Mysql LIB
 var mysql = require('mysql2');
-var util = require('util');
 
 // DB Credentials
 var connection = mysql.createConnection({
@@ -19,6 +18,10 @@ connection.connect(function(err) {
         console.log(err.fatal);
     }
 });
+
+//Course object
+var CourseClass = require('./Course.js');
+
 
 module.exports = class DBHandler {
 
@@ -43,7 +46,56 @@ module.exports = class DBHandler {
 		return queryPromise;
 				
 	}
-
+	
+	showCoursesDB(){
+	    //Create Course Objects
+		var courseObjects = [];
+		
+		// Perform a query
+		let $query = 'SELECT * FROM Courses';
+		var result = connection.promise().query($query)
+	    .then( ([rows,fields]) => {
+			for (i = 0; i < rows.length; i++) {
+				var currentRow = rows[i];
+				var Course = new CourseClass(currentRow["course_name"],currentRow["course_code"],currentRow["course_credit"],
+			 	currentRow["course_ects"],currentRow["course_prerequisite"],currentRow["mandatory/elective"],
+			 	currentRow["active/inactive"],currentRow["semester"],new Array(),new Array());
+			 	courseObjects.push(Course);				
+			}
+			
+			//Get Instructors of current course
+			$query = 'SELECT * FROM Instructors';
+		    return connection.promise().query($query)
+	    })
+	    .then( ([rows,fields]) => {
+			//Add them to the corresponding object
+			rows.forEach(function(row) {
+				courseObjects.forEach(function(Course) {
+					if(row.course_code == Course.courseCode){
+						Course.instructors.push(row.instructor_name);
+					}
+				});
+			});
+			
+			//Get Instructors of current course
+			$query = 'SELECT * FROM Assistants';
+			return connection.promise().query($query)
+	    })
+	    .then( ([rows,fields]) => {
+			//Add them to the corresponding object
+			rows.forEach(function(row) {
+				courseObjects.forEach(function(Course) {
+					if(row.course_code == Course.courseCode){
+						Course.assistants.push(row.assistant_name);
+					}
+				});
+			});
+			//Return completed Course object array
+			return courseObjects
+	    });
+					
+		return result;
+	}
 
 	
 }

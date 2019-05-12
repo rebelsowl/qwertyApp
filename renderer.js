@@ -1,10 +1,12 @@
-// This file is required by the index.html file and will
-// be executed in the renderer process for that window.
-// All of the Node.js APIs are available in this process.
+// All button clicks with gui handled here
 
 let $ = jQuery = require('jquery');
 
 module.exports = {
+	showCourses: function() {
+		user.showCourses();
+	}
+	
 	addcontentmanager: function() {
 		var data = $('form').serializeArray().reduce(function(obj, item) {
 		    obj[item.name] = item.value;
