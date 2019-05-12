@@ -7,12 +7,9 @@
 	<link rel="stylesheet" href="./css/bootstrap/bootstrap.min.css" />
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/photon.css">
+    <link rel="stylesheet" href="css/photon.css">	
 	
-
     <!-- Javascript -->
-	<!-- Bootstrap Optional JavaScript -->
-	<!-- jQuery first, then Bootstrap JS -->
 	<script>
 	//jQuery require
 	let $ = jQuery = require('jquery');
@@ -23,21 +20,32 @@
 	//Create user object
 	const accountType = require('electron').remote.getGlobal('accountType'); // Get account type
 	const username = require('electron').remote.getGlobal('username'); // Get account type
-	
-	console.log(accountType);
-	console.log(username);
-	
+		
 	//DBHandler object
 	var DBHandlerClass = require('./src/DBHandler.js');
 	var DBHandler = new DBHandlerClass();
+	
+	
+	//ContentMaganer or WebAdmin class object
+	var user;
+	if (accountType == "WebAdmin"){
+		//ContentManager Object
+		var WebAdminClass = require('./src/WebAdmin.js');
+		user = new WebAdminClass(username);		
+	} else {
+		//ContentManager Object
+		var ContenManagerClass = require('./src/ContentManager.js');
+		user = new ContentManagerClass(username);
+	}
+	
 
 	
-	//Node JS Functions
-    var render = require('./renderer.js');
+	//Interaction functions(Button clicks)
+    //var render = require('./interact.js');
 	</script>
 	
-    <script>		
-    </script>
+    <!-- All GUI interactions functions -->
+    <script src="interact.js"></script>
 	
   </head>
   <body>
@@ -63,7 +71,8 @@
           <div class="pane pane-sm sidebar" id="side-nav">
           </div>
 		  
-		  <div id="content">
+		  <div id="content" class="pane pane-bg"  >
+			  
 	      </div>
 		  
         </div>
@@ -85,8 +94,7 @@
 	  }
 	  $( "#side-nav" ).load(navigationLoadPath);
 	  jQuery.ajaxSetup({async:true});
-	  
-	  
+	  	  
 	  
 	  // Get all buttons with class="btn" inside the container
 	  var btns = document.getElementsByClassName("nav-group-item");
@@ -107,9 +115,7 @@
 	  //On log out click
       $('#logout-btn').on('click', () => {
 	  	ipc.sendSync('logout');
-      });
-	  
-	  
-	  
+      });	  
   </script>
+	  
 </html>
