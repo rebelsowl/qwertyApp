@@ -5,6 +5,13 @@ let $ = jQuery = require('jquery');
 var DBHandlerClass = require('./DBHandler.js');
 var DBHandler = new DBHandlerClass();
 
+//Course object
+var CourseClass = require('./Course.js');
+//Instructor object
+var InstructorClass = require('./Instructor.js');
+//Assistant object
+var AssistantClass = require('./Assistant.js');
+
 module.exports = class ContentManager {
 	constructor(username){
 		this.username = username;
@@ -29,9 +36,14 @@ module.exports = class ContentManager {
 			        "</tr>"
 			    );
 			});
-		});
-		
-		
+		});		
 	}
 	
+	addCourse(courseName,courseCode,courseCredit,courseEcts,coursePrequirities,mandatory,active,semester,instructors,assistants){
+		var instructorsObject = new InstructorClass(instructors);
+		var assistantsObject = new AssistantClass(assistants);
+		var courseObject = new CourseClass(courseName,courseCode,courseCredit,courseEcts,coursePrequirities,mandatory,active,semester,instructorsObject,assistantsObject);
+		console.log(courseObject);
+	}
+		
 }

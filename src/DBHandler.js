@@ -96,6 +96,10 @@ module.exports = class DBHandler {
 					
 		return result;
 	}
+	
+	addCourseDB(courseObject){
+		
+	}
 
 	
 }
