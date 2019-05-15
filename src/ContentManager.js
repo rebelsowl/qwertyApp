@@ -17,9 +17,9 @@ module.exports = class ContentManager {
 		this.username = username;
 	}
 	showCourses(){
-		var result = DBHandler.showCoursesDB();
+		var DBResult = DBHandler.showCoursesDB();
 		
-		result.then(function(courseObjects) {
+		DBResult.then(function(courseObjects) {
 			courseObjects.forEach(function(Course) {
 			    $("#tablecontent").append(
 			        "<tr>" +
@@ -43,7 +43,14 @@ module.exports = class ContentManager {
 		var instructorsObject = new InstructorClass(instructors);
 		var assistantsObject = new AssistantClass(assistants);
 		var courseObject = new CourseClass(courseName,courseCode,courseCredit,courseEcts,coursePrequirities,mandatory,active,semester,instructorsObject,assistantsObject);
-		console.log(courseObject);
+		var DBResult = DBHandler.addCourseDB(courseObject);
+		DBResult.then(function(returnedValue) {
+			if(returnedValue = 1){
+		        $('#add-course-form')[0].reset();  
+				alert("Course Added Succesfully")
+			}
+		});		
+		
 	}
 		
 }

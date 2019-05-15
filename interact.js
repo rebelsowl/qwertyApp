@@ -32,7 +32,6 @@ function addCourseClicked() {
 		assistantArray.push(data["assistants"+xi]);
 		xi++;
 	}
-	console.log(data);
 	user.addCourse(data.courseName,data.courseCode,data.courseCredit,data.courseEcts,data.coursePrequirities,
 		data.mandatory,data.active,data.semester,instructorArray,assistantArray);
 	
