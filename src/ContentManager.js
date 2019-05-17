@@ -36,6 +36,9 @@ module.exports = class ContentManager {
 			        "</tr>"
 			    );
 			});
+			//Sort Table
+	  	  	$("#showCoursesTable").tablesorter();
+			
 		});
 	}
 	
