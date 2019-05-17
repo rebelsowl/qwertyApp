@@ -96,6 +96,41 @@ module.exports = class DBHandler {
 					
 		return result;
 	}
+	
+	addCourseDB(courseObject){
+		// Perform a query
+		
+		let query = "INSERT INTO Courses (`course_code`, `course_credit`, `course_ects`, `course_name`, `course_prerequisite`, `mandatory/elective`, `active/inactive`, `semester`) ";
+		query += `VALUES (${courseObject.courseCode}, ${courseObject.courseCredit}, ${courseObject.courseEcts}, '${courseObject.courseName}', ${courseObject.coursePrequirities}, ${courseObject.mandatory}, ${courseObject.active}, ${courseObject.semester})`;
+		console.log(query);
+		
+		var result = connection.promise().query(query)
+	    .then( ([rows,fields]) => {
+			console.log(rows);
+			let query = "INSERT INTO Assistants VALUES ";
+			courseObject.assistants.assistantName.forEach(function(row) {
+				query += `(${courseObject.courseCode}, '${row}'),`;
+			});
+			//Delete the last comma to prevent SQL Error
+			query = query.substring(0, query.length-1);
+		    return connection.promise().query(query);
+	    }).then( ([rows,fields]) => {
+			console.log(rows);
+			let query = "INSERT INTO Instructors VALUES ";
+			courseObject.instructors.instructorName.forEach(function(row) {
+				query += `(${courseObject.courseCode}, '${row}'),`;
+			});
+			//Delete the last comma to prevent SQL Error
+			query = query.substring(0, query.length-1);
+		    return connection.promise().query(query);
+	    }).catch( err => {
+			alert(err);
+			console.log(err);
+    	});
+
+		return result;
+		
+	}
 
 	
 }

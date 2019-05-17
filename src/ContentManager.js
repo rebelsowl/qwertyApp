@@ -5,14 +5,21 @@ let $ = jQuery = require('jquery');
 var DBHandlerClass = require('./DBHandler.js');
 var DBHandler = new DBHandlerClass();
 
+//Course object
+var CourseClass = require('./Course.js');
+//Instructor object
+var InstructorClass = require('./Instructor.js');
+//Assistant object
+var AssistantClass = require('./Assistant.js');
+
 module.exports = class ContentManager {
 	constructor(username){
 		this.username = username;
 	}
 	showCourses(){
-		var result = DBHandler.showCoursesDB();
+		var DBResult = DBHandler.showCoursesDB();
 		
-		result.then(function(courseObjects) {
+		DBResult.then(function(courseObjects) {
 			courseObjects.forEach(function(Course) {
 			    $("#tablecontent").append(
 			        "<tr>" +
@@ -30,8 +37,20 @@ module.exports = class ContentManager {
 			    );
 			});
 		});
-		
-		
 	}
 	
+	addCourse(courseName,courseCode,courseCredit,courseEcts,coursePrequirities,mandatory,active,semester,instructors,assistants){
+		var instructorsObject = new InstructorClass(instructors);
+		var assistantsObject = new AssistantClass(assistants);
+		var courseObject = new CourseClass(courseName,courseCode,courseCredit,courseEcts,coursePrequirities,mandatory,active,semester,instructorsObject,assistantsObject);
+		var DBResult = DBHandler.addCourseDB(courseObject);
+		DBResult.then(function(returnedValue) {
+			if(returnedValue = 1){
+		        $('#add-course-form')[0].reset();  
+				alert("Course Added Succesfully")
+			}
+		});
+		
+	}
+		
 }
