@@ -36,7 +36,7 @@ module.exports = class ContentManager {
 			        "</tr>"
 			    );
 			});
-		});		
+		});
 	}
 	
 	addCourse(courseName,courseCode,courseCredit,courseEcts,coursePrequirities,mandatory,active,semester,instructors,assistants){
@@ -49,7 +49,7 @@ module.exports = class ContentManager {
 		        $('#add-course-form')[0].reset();  
 				alert("Course Added Succesfully")
 			}
-		});		
+		});
 		
 	}
 		

@@ -6,19 +6,19 @@
   </div>
   <div class="form-group">
     <label>Course Code</label>
-    <input name="courseCode" type="text" class="form-control">
+    <input name="courseCode" type="text" id="cCode" class="form-control">
   </div>
   <div class="form-group">
     <label>Course Credit</label>
-    <input name="courseCredit" type="text" class="form-control">
+    <input name="courseCredit" type="text" id="cCredit"  class="form-control">
   </div>
   <div class="form-group">
     <label>Course ECTS</label>
-    <input name="courseEcts" type="text" class="form-control">
+    <input name="courseEcts" type="text" id="cEcts"  class="form-control">
   </div>
   <div class="form-group">
     <label>Course Prerequisite</label>
-    <input name="coursePrequirities" type="text" class="form-control">
+    <input name="coursePrequirities" id="cPre"  type="text" class="form-control">
   </div>
   <div class="checkbox">
     <label>
@@ -49,7 +49,7 @@
   
   <div class="form-group">
     <label>Course Semester</label>
-    <input name="semester" type="text" class="form-control">
+    <input name="semester" type="text" id="cSemester"  class="form-control">
   </div>
   
   <div class="checkbox">
@@ -70,7 +70,8 @@
 	//Button click listener
 	$("#addCourseOK").click(function(e){
 		e.preventDefault();
-		addCourseClicked();
+		//First control the form
+		if (!addCourseFormControl()) addCourseClicked();
 	});
 	
 	//Add instructor
@@ -95,6 +96,54 @@
 		yi++; //text box increment
 		$(wrappera).append('<label>Assitant Name #'+yi+'</label><input type="text" name="assistants'+yi+'" class="form-control">'); //add input box
 	});	
+	
+	//Form Control
+	function addCourseFormControl(){
+		var empty = false;
+		$('input[type="text"]').each(function(){
+		   if($(this).val()==""){
+			   empty=true;
+			   $(this).focus(); //Focus on field
+			   return false;
+		    }
+		 });
+		 		 
+		 if(empty==true){
+		 	alert("Please fill in the form");
+			return empty;
+		 } else {
+			 //Course code numeric check
+			 if (!$.isNumeric($("#cCode").val())){
+				 alert("Course Code have to be 3 digit numeric");
+				 empty = true;
+			 }
+			 //Course cCredit numeric check
+			 if (!$.isNumeric($("#cCredit").val())){
+				 alert("Course Credit have to be numeric");
+				 empty = true;
+			 }
+			 //Course cEcts numeric check
+			 if (!$.isNumeric($("#cEcts").val())){
+				 alert("Course Ects have to be numeric");
+				 empty = true;
+			 }
+			 //Course Pre numeric check
+			 if (!$.isNumeric($("#cPre").val())){
+				 alert("Course Prerequisite have to be 3 digit numeric");
+				 empty = true;
+			 }
+			 //Course code numeric check
+			 var semesterVal = $("#cSemester").val();
+			 if (!$.isNumeric(semesterVal) || parseInt(semesterVal) < 1 || parseInt(semesterVal) > 8 ){
+				 alert("Course Semester have to be numeric (1 to 8)");
+				 empty = true;
+			 }
+			 return empty;
+		 }
+		 		
+		 
+	}
+	
 	
 	
 </script>
