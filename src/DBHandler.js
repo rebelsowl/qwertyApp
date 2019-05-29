@@ -131,6 +131,97 @@ module.exports = class DBHandler {
 		return result;
 		
 	}
+	
+	editCourseHelperDB(courseCode){
+	    //Create Course Objects
+		var courseObjects = [];
+		
+		// Perform a query
+		let $query = 'SELECT * FROM Courses';
+		var result = connection.promise().query($query)
+	    .then( ([rows,fields]) => {
+			for (i = 0; i < rows.length; i++) {
+				var currentRow = rows[i];
+				var Course = new CourseClass(currentRow["course_name"],currentRow["course_code"],currentRow["course_credit"],
+			 	currentRow["course_ects"],currentRow["course_prerequisite"],currentRow["mandatory/elective"],
+			 	currentRow["active/inactive"],currentRow["semester"],new Array(),new Array());
+			 	courseObjects.push(Course);				
+			}
+			
+			//Get Instructors of current course
+			$query = 'SELECT * FROM Instructors';
+		    return connection.promise().query($query)
+	    })
+	    .then( ([rows,fields]) => {
+			//Add them to the corresponding object
+			rows.forEach(function(row) {
+				courseObjects.forEach(function(Course) {
+					if(row.course_code == Course.courseCode){
+						Course.instructors.push(row.instructor_name);
+					}
+				});
+			});
+			
+			//Get Instructors of current course
+			$query = 'SELECT * FROM Assistants';
+			return connection.promise().query($query)
+	    })
+	    .then( ([rows,fields]) => {
+			//Add them to the corresponding object
+			rows.forEach(function(row) {
+				courseObjects.forEach(function(Course) {
+					if(row.course_code == Course.courseCode){
+						Course.assistants.push(row.assistant_name);
+					}
+				});
+			});
+			//Return completed Course object array
+			return courseObjects
+	    });
+					
+		return result;
+	}
+	
+	editCourseDB(courseObject){
+		//First delete old informations then add new infos
+		
+		let query = "DELETE FROM `Instructors` WHERE `course_code` = "+courseObject.courseCode;
+		
+		var result = connection.promise().query(query)
+	    .then( ([rows,fields]) => {
+			query = "DELETE FROM `Assistants` WHERE `course_code` = "+courseObject.courseCode;
+		    return connection.promise().query(query);
+	    }).then( ([rows,fields]) => {
+			query = "DELETE FROM `Courses` WHERE `course_code` = "+courseObject.courseCode;
+		    return connection.promise().query(query);
+	    }).then( ([rows,fields]) => {
+			query = "INSERT INTO Courses (`course_code`, `course_credit`, `course_ects`, `course_name`, `course_prerequisite`, `mandatory/elective`, `active/inactive`, `semester`) ";
+			query += `VALUES (${courseObject.courseCode}, ${courseObject.courseCredit}, ${courseObject.courseEcts}, '${courseObject.courseName}', ${courseObject.coursePrequirities}, ${courseObject.mandatory}, ${courseObject.active}, ${courseObject.semester})`;
+		    return connection.promise().query(query);
+	    }).then( ([rows,fields]) => {
+			console.log(rows);
+			let query = "INSERT INTO Assistants VALUES ";
+			courseObject.assistants.assistantName.forEach(function(row) {
+				query += `(${courseObject.courseCode}, '${row}'),`;
+			});
+			//Delete the last comma to prevent SQL Error
+			query = query.substring(0, query.length-1);
+		    return connection.promise().query(query);
+	    }).then( ([rows,fields]) => {
+			console.log(rows);
+			let query = "INSERT INTO Instructors VALUES ";
+			courseObject.instructors.instructorName.forEach(function(row) {
+				query += `(${courseObject.courseCode}, '${row}'),`;
+			});
+			//Delete the last comma to prevent SQL Error
+			query = query.substring(0, query.length-1);
+		    return connection.promise().query(query);
+	    }).catch( err => {
+			alert(err);
+			console.log(err);
+    	});
 
+		return result;
+	}
 	
 }
