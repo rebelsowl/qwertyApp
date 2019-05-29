@@ -1,15 +1,172 @@
-          <div class="pane-form">			  
-			<form>
-			  <div class="form-group">
-			    <label>Username</label>
-			    <input name="username" type="input" class="form-control" placeholder="Username">
-			  </div>
-			  <div class="form-group">
-			    <label>Password</label>
-			    <input name="password" type="password" class="form-control" placeholder="Password">
-			  </div>
-			  <div class="form-actions">
-			    <button id="form-button" type="submit" class="btn btn-form btn-primary" onClick="render.addcontentmanager()">OK</button>
-			  </div>
-			</form>
-          </div>
+<div class="pane-form">		
+    <div class="form-group">
+      <select id="course-select" class="form-control">
+      </select>
+</div>
+	  
+<form id="add-course-form">
+  <div class="form-group">
+    <label>Course Name</label>
+    <input id="courseName" name="courseName" type="text" class="form-control" >
+  </div>
+  <div class="form-group">
+    <label>Course Code</label>
+    <input name="courseCode" type="text" id="cCode" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Course Credit</label>
+    <input name="courseCredit" type="text" id="cCredit"  class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Course ECTS</label>
+    <input name="courseEcts" type="text" id="cEcts"  class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Course Prerequisite</label>
+    <input name="coursePrequirities" id="cPre"  type="text" class="form-control">
+  </div>
+  <div class="checkbox">
+    <label>
+      <input name="mandatory" type="checkbox"> Mandatory/Elective
+    </label>
+  </div>  
+  
+  
+  <div class="form-group" id="instructorsWrapper">
+	  
+  </div>
+  <div class="btn-group">
+  	  <button id="addInstructor" class="btn btn-large btn-default" id="addInstructor">
+    	  <span class="icon icon-plus-circled"></span> Add Instructor
+  	  </button>
+  </div>
+  
+  <div class="form-group" id="assistantWrapper">
+
+  </div>
+  <div class="btn-group">
+  	  <button id="addAssistant" class="btn btn-large btn-default" id="addAssistant">
+    	  <span class="icon icon-plus-circled"></span> Add Assistant
+  	  </button>
+  </div>
+  
+  <div class="form-group">
+    <label>Course Semester</label>
+    <input name="semester" type="text" id="cSemester"  class="form-control">
+  </div>
+  
+  <div class="checkbox">
+    <label>
+      <input name="active" type="checkbox"> Active/Inactive
+    </label>
+  </div>
+  
+  
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-form btn-primary" id="addCourseOK">OK</button>
+  </div>
+</form>
+</div>
+
+<script>
+	//Initial course codes load
+	user.editCourseHelper();
+	
+	//Course selection changed event
+	$("#course-select").change(function() {
+		//Store the selected course code
+        var selectedCourse = $(this).children("option:selected").val();
+		//Reset the form
+        $('#add-course-form')[0].reset();  
+		//Delete Assistant and Instructor dynamic inputs
+		yi = 0;
+		xi = 0;
+		wrapperi.empty();
+		wrappera.empty();
+		
+		//Load the course infos into form
+		user.editCourseHelper(selectedCourse);
+	});
+	
+	
+	//Button click listener
+	$("#addCourseOK").click(function(e){
+		e.preventDefault();
+		//First control the form
+		if (!addCourseFormControl()) editCourseClicked();
+	});
+	
+	//Add instructor
+	var wrapperi   		= $("#instructorsWrapper"); //Fields wrapper
+	var add_button_instructor      = $("#addInstructor");
+	
+	var xi = 0; //initlal text box count
+	$(add_button_instructor).click(function(e){ //on add input button click
+		e.preventDefault();
+		xi++; //text box increment
+		$(wrapperi).append('<label>Instructor Name #'+xi+'</label><input type="text" name="instructors'+xi+'" class="form-control">'); //add input box
+	});
+	
+	
+	//Add assistant
+	var wrappera 		= $("#assistantWrapper"); //Fields wrapper
+	var add_button_assitant      = $("#addAssistant");
+	
+	var yi = 0; //initlal text box count
+	$(add_button_assitant).click(function(e){ //on add input button click
+		e.preventDefault();
+		yi++; //text box increment
+		$(wrappera).append('<label>Assistant Name #'+yi+'</label><input type="text" name="assistants'+yi+'" class="form-control">'); //add input box
+	});	
+	
+	//Form Control
+	function addCourseFormControl(){
+		var empty = false;
+		$('input[type="text"]').each(function(){
+		   if($(this).val()==""){
+			   empty=true;
+			   $(this).focus(); //Focus on field
+			   return false;
+		    }
+		 });
+		 		 
+		 if(empty==true){
+		 	alert("Please fill in the form");
+			return empty;
+		 } else {
+			 //Course code numeric check
+			 if (!$.isNumeric($("#cCode").val())){
+				 alert("Course Code have to be 3 digit numeric");
+				 empty = true;
+			 }
+			 //Course cCredit numeric check
+			 if (!$.isNumeric($("#cCredit").val())){
+				 alert("Course Credit have to be numeric");
+				 empty = true;
+			 }
+			 //Course cEcts numeric check
+			 if (!$.isNumeric($("#cEcts").val())){
+				 alert("Course Ects have to be numeric");
+				 empty = true;
+			 }
+			 //Course Pre numeric check
+			 if (!$.isNumeric($("#cPre").val())){
+				 alert("Course Prerequisite have to be 3 digit numeric");
+				 empty = true;
+			 }
+			 //Course code numeric check
+			 var semesterVal = $("#cSemester").val();
+			 if (!$.isNumeric(semesterVal) || parseInt(semesterVal) < 1 || parseInt(semesterVal) > 8 ){
+				 alert("Course Semester have to be numeric (1 to 8)");
+				 empty = true;
+			 }
+			 return empty;
+		 }
+		 		
+		 
+	}
+	
+	
+	
+</script>

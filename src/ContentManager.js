@@ -56,4 +56,70 @@ module.exports = class ContentManager {
 		
 	}
 		
+	editCourseHelper(courseCode){
+		//Get all courses
+		var DBResult = DBHandler.editCourseHelperDB();
+		
+		//Just load the course codes to select options
+		if(typeof courseCode === 'undefined'){
+			DBResult.then(function(courseObjects) {
+				courseObjects.forEach(function(Course) {
+				    $("#course-select").append(
+						"<option value="+Course.courseCode+">CENG"+Course.courseCode+"</option>"
+				    );
+				});
+			});
+		} 
+		//Load selected course infos into form
+		else {
+			DBResult.then(function(courseObjects) {
+				courseObjects.forEach(function(Course) {
+					if (Course.courseCode == courseCode){
+						$( "input[name='courseName']" ).val(Course.courseName);
+						$( "input[name='courseCode']" ).val(Course.courseCode);
+						$( "input[name='courseCredit']" ).val(Course.courseCredit);
+						$( "input[name='courseEcts']" ).val(Course.courseEcts);
+						$( "input[name='coursePrequirities']" ).val(Course.coursePrequirities);
+						$( "input[name='semester']" ).val(Course.semester);
+						if (Course.mandatory == 1)
+							$("input[name='mandatory']").attr('checked', true);
+						if (Course.active == 1)
+							$("input[name='active']").attr('checked', true);
+						
+						//Assistants and intructors
+						//First create input boxes
+						for (i = 0; i < Course.instructors.length; i++) {
+							$( "#addInstructor" ).click();
+							alert("click");
+						}
+						for (i = 0; i < Course.assistants.length; i++) {
+							$( "#addAssistant" ).click();
+						}
+						//Add all instructors and assistants to form
+						for (i = 1; i < Course.instructors.length+1; i++) {
+							$( "input[name='instructors"+i+"']" ).val(Course.instructors[i-1]);
+						}
+						for (i = 1; i < Course.assistants.length+1; i++) {
+							$( "input[name='assistants"+i+"']" ).val(Course.assistants[i-1]);
+						}
+						
+					}
+					
+				});
+			});
+		}
+			
+	}
+	
+	editCourse(courseObject){
+		var DBResult = DBHandler.editCourseDB(courseObject);
+		DBResult.then(function(returnedValue) {
+			if(returnedValue = 1){
+		        $('#add-course-form')[0].reset();  
+				alert("Course Updated Succesfully")
+			}
+		});
+	}
+	
+		
 }
