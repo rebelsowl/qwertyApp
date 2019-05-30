@@ -224,4 +224,21 @@ module.exports = class DBHandler {
 		return result;
 	}
 	
+	selectCoursesForSemesterHelperDB(Coursecode){
+		//Create Course Objects
+		var courseCodes = [];
+		// Perform a query
+		let $query = 'SELECT * FROM Courses';
+		var result = connection.promise().query($query)
+	    .then( ([rows,fields]) => {
+	    	for (i = 0; i < rows.length; i++) {
+				var currentRow = rows[i];
+				var code = currentRow["course_code"];
+			 	courseCodes.push(code);				
+			}
+			return courseCodes
+		});
+		return result;
+
+	}
 }
