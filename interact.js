@@ -95,8 +95,6 @@ function selectCourseClicked() {
 	    obj[item.name] = item.value;
 	    return obj;
 	}, {});
-	console.log(data.semester);
-	console.log(data.semester);
 	if(data.semester=="s1") data.semester=1;
 	else if(data.semester=="s2") data.semester=2;
 	else if(data.semester=="s3") data.semester=3;
@@ -106,8 +104,6 @@ function selectCourseClicked() {
 	else if(data.semester=="s7") data.semester=7;
 	else if(data.semester=="s8") data.semester=8;
 
-
-	console.log(data.semester);
 	console.log(data.semester);
 	console.log(data.coursesl);
 	user.selectCoursesForSemester(data.coursesl,data.semester);
