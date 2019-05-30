@@ -241,4 +241,26 @@ module.exports = class DBHandler {
 		return result;
 
 	}
+
+	selectCoursesForSemesterDB(course, semester){
+		let query = "UPDATE Courses SET semester='";
+   		query+= semester;
+   		query+="' WHERE course_code='";
+   		query+=course;
+   		query+=
+		console.log(query);
+		
+		var result = connection.promise().query(query)
+	    .then( ([rows,fields]) => {
+		    return connection.promise().query(query);
+	    }).catch( err => {
+			alert(err);
+			console.log(err);
+    	});
+
+		return result;
+	}
+	
+
+
 }

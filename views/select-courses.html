@@ -1,8 +1,8 @@
           <div class="pane-form">			  
-			<form>
+			<form id="select-courses-for-semester-form">
 			  <div class="form-group">
 			    <label>Choose Course</label>
-			    <select id="course-select" class="form-control">
+			    <select id="coursesl" class="form-control">
 			    </select>
 			  </div>
 			  <div class="form-group">
@@ -26,7 +26,7 @@
 <script>
 	user.selectCoursesForSemesterHelper();	
 
-	$("#course-select").change(function() {
+	$("#coursesl").change(function() {
 		user.selectCoursesForSemesterHelper(selectedCourse);
 	});	
 

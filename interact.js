@@ -96,32 +96,23 @@ function selectCourseClicked() {
 	    return obj;
 	}, {});
 	
-	//Make checkboxes 1 or 0
-	if(data.active=="on") data.active=1;
-	else data.active=0;
-	
-	if(data.mandatory=="on") data.mandatory=1;
-	else data.mandatory=0;
-	
-	//Get all instructors from inputs
-	instructorArray=[];
-	xi=1;
-	while(data["instructors"+xi] != undefined){
-		instructorArray.push(data["instructors"+xi]);
-		xi++;
-	}
+	if(data.semester=="s1") data.semester=1;
+	else if(data.semester=="s2") data.semester=2;
+	else if(data.semester=="s3") data.semester=3;
+	else if(data.semester=="s4") data.semester=4;
+	else if(data.semester=="s5") data.semester=5;
+	else if(data.semester=="s6") data.semester=6;
+	else if(data.semester=="s7") data.semester=7;
+	else  data.semester=8;
 
-	//Get all instructors from inputs
-	assistantArray=[];
 	xi=1;
-	while(data["assistants"+xi] != undefined){
+	while(data["coursesl"+xi] != undefined){
 		assistantArray.push(data["assistants"+xi]);
 		xi++;
 	}
-	var instructorsObject = new InstructorClass(instructorArray);
-	var assistantsObject = new AssistantClass(assistantArray);
-	var courseObject = new CourseClass(data.courseName,data.courseCode,data.courseCredit,data.courseEcts,data.coursePrequirities,data.mandatory,data.active,data.semester,instructorsObject,assistantsObject);
-
-	user.editCourse(courseObject);
+	
+	console.log(data.semester);
+	console.log(data.coursesl);
+	user.selectCoursesForSemester(data.coursesl,data.semester);
 	
 }

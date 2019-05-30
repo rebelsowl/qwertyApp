@@ -64,7 +64,7 @@ module.exports = class ContentManager {
 		if(typeof courseCode === 'undefined'){
 			DBResult.then(function(courseObjects) {
 				courseObjects.forEach(function(Course) {
-				    $("#course-select").append(
+				    $("#coursesl").append(
 						"<option value="+Course.courseCode+">CENG"+Course.courseCode+"</option>"
 				    );
 				});
@@ -124,11 +124,19 @@ module.exports = class ContentManager {
         var DBResult =DBHandler.selectCoursesForSemesterHelperDB();
         DBResult.then(function(courseCodes) {
             courseCodes.forEach(function(Course) {
-                $("#course-select").append(
+                $("#coursesl").append(
                     "<option value="+Course+">CENG"+Course+"</option>"
                 );
             });
         });
     }
-		
+	selectCoursesForSemester(course, semester){
+		var DBResult = DBHandler.selectCoursesForSemesterDB(course, semester);
+		DBResult.then(function(returnedValue) {
+			if(returnedValue = 1){
+		        $('#select-courses-for-semester-form')[0].reset();  
+				alert("Course Semester set")
+			}
+		});
+	}
 }
