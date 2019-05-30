@@ -120,7 +120,7 @@ module.exports = class ContentManager {
 			}
 		});
 	}
-	selectCoursesForSemesterHelper(CourseCode){
+	selectCoursesForSemesterHelper(CourseCodes){
 		var DBResult =DBHandler.selectCoursesForSemesterHelperDB();
 		DBResult.then(function(courseCodes) {
 				for (var i = 0; i <courseCodes.length; i++) {

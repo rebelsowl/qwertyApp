@@ -224,7 +224,7 @@ module.exports = class DBHandler {
 		return result;
 	}
 	
-	selectCoursesForSemesterHelperDB(Coursecode){
+	selectCoursesForSemesterHelperDB(){
 		//Create Course Objects
 		var courseCodes = [];
 		// Perform a query
