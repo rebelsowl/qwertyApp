@@ -19,7 +19,7 @@
       </select>
 			  </div>
 			  <div class="form-actions">
-			    <button id="form-button" type="submit" class="btn btn-form btn-primary" onClick="render.addcontentmanager()">Save</button>  <!-- d]]]]]-->
+			    <button id="selectCourseSave" type="submit" class="btn btn-form btn-primary">Save</button>  <!-- d]]]]]-->
 			  </div>
 			</form>
           </div>
@@ -30,6 +30,13 @@
 		user.selectCoursesForSemesterHelper(selectedCourse);
 	});	
 
+	$("#selectCourseSave").click(function(e){
+		e.preventDefault();
+		//First control the form
+		//buraya interactjs deki fonksiyonu yaz
+		selectCourseClicked();
+
+	});
 
 
 
