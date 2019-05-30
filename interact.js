@@ -103,13 +103,9 @@ function selectCourseClicked() {
 	else if(data.semester=="s5") data.semester=5;
 	else if(data.semester=="s6") data.semester=6;
 	else if(data.semester=="s7") data.semester=7;
-	else  data.semester=8;
+	else if(data.semester=="s8") data.semester=8;
 
-	xi=1;
-	while(data["coursesl"+xi] != undefined){
-		assistantArray.push(data["assistants"+xi]);
-		xi++;
-	}
+
 	
 	console.log(data.semester);
 	console.log(data.coursesl);
