@@ -1,15 +1,26 @@
           <div class="pane-form">			  
 			<form>
 			  <div class="form-group">
-			    <label>Username</label>
-			    <input name="username" type="input" class="form-control" placeholder="Username">
+			    <label>Choose Course</label>
+			    <select id="course-select" class="form-control">
+
+			    </select>
 			  </div>
 			  <div class="form-group">
-			    <label>Password</label>
-			    <input name="password" type="password" class="form-control" placeholder="Password">
+			    <label>Choose Semester</label>
+			    <select id="semester" class="form-control">
+			    	<option value="s1">1</option>
+			    	<option value="s2">2</option>
+			    	<option value="s3">3</option>
+			    	<option value="s4">4</option>
+			    	<option value="s5">5</option>
+			    	<option value="s6">6</option>
+			    	<option value="s7">7</option>
+			    	<option value="s8">8</option>
+      </select>
 			  </div>
 			  <div class="form-actions">
-			    <button id="form-button" type="submit" class="btn btn-form btn-primary" onClick="render.addcontentmanager()">OK</button>
+			    <button id="form-button" type="submit" class="btn btn-form btn-primary" onClick="render.addcontentmanager()">Save</button>
 			  </div>
 			</form>
           </div>
