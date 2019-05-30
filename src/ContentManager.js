@@ -121,13 +121,14 @@ module.exports = class ContentManager {
 		});
 	}
 	selectCoursesForSemesterHelper(CourseCodes){
-		var DBResult =DBHandler.selectCoursesForSemesterHelperDB();
-		DBResult.then(function(courseCodes) {
-				for (var i = 0; i <courseCodes.length; i++) {  
-					//console.log("girdi");
-					$("#course-select").append(	"<option value="+CourseCodes[i]+">CENG"+CourseCodes[i]+"</option>");
-				}
-			});
-	}
+        var DBResult =DBHandler.selectCoursesForSemesterHelperDB();
+        DBResult.then(function(courseCodes) {
+            courseCodes.forEach(function(Course) {
+                $("#course-select").append(
+                    "<option value="+Course+">CENG"+Course+"</option>"
+                );
+            });
+        });
+    }
 		
 }
