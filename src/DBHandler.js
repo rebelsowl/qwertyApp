@@ -247,7 +247,7 @@ module.exports = class DBHandler {
    		query+= semester;
    		query+="' WHERE course_code='";
    		query+=course;
-   		query+=
+   		query+="';";
 		console.log(query);
 		
 		var result = connection.promise().query(query)
