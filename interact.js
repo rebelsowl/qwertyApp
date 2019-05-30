@@ -88,3 +88,24 @@ function addcontentmanager() {
 	    return obj;
 	}, {});
 }
+
+
+function selectCourseClicked() {
+	var data = $('form').serializeArray().reduce(function(obj, item) {
+	    obj[item.name] = item.value;
+	    return obj;
+	}, {});
+	if(data.semester=="s1") data.semester=1;
+	else if(data.semester=="s2") data.semester=2;
+	else if(data.semester=="s3") data.semester=3;
+	else if(data.semester=="s4") data.semester=4;
+	else if(data.semester=="s5") data.semester=5;
+	else if(data.semester=="s6") data.semester=6;
+	else if(data.semester=="s7") data.semester=7;
+	else if(data.semester=="s8") data.semester=8;
+
+	console.log(data.semester);
+	console.log(data.coursesl);
+	user.selectCoursesForSemester(data.coursesl,data.semester);
+	
+}

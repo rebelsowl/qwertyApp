@@ -224,4 +224,43 @@ module.exports = class DBHandler {
 		return result;
 	}
 	
+	selectCoursesForSemesterHelperDB(){
+		//Create Course Objects
+		var courseCodes = [];
+		// Perform a query
+		let $query = 'SELECT * FROM Courses';
+		var result = connection.promise().query($query)
+	    .then( ([rows,fields]) => {
+	    	for (i = 0; i < rows.length; i++) {
+				var currentRow = rows[i];
+				var code = currentRow["course_code"];
+			 	courseCodes.push(code);				
+			}
+			return courseCodes
+		});
+		return result;
+
+	}
+
+	selectCoursesForSemesterDB(course, semester){
+		let query = "UPDATE Courses SET semester='";
+   		query+= semester;
+   		query+="' WHERE course_code='";
+   		query+=course;
+   		query+="';";
+		console.log(query);
+		
+		var result = connection.promise().query(query)
+	    .then( ([rows,fields]) => {
+		    return connection.promise().query(query);
+	    }).catch( err => {
+			alert(err);
+			console.log(err);
+    	});
+
+		return result;
+	}
+	
+
+
 }
