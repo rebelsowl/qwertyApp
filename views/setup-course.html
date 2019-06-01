@@ -43,7 +43,7 @@
 
 
 <script >
-	//Add assistant
+	//Add Hour Dynamic
 	var wrapperh 		= $("#hourWrapper"); //Fields wrapper
 	var add_button_hour      = $("#addHour");
 	
@@ -53,6 +53,9 @@
 		yi++; //text box increment
 		$(wrapperh).append('<label>Choose Hour #'+yi+'</label><select id="hours'+yi+'"name="hours'+yi+'" class="form-control"><option value="845">8.45 - 9.30</option><option value="945">9.45 - 10.30</option><option value="1045">10.45 - 11.30</option><option value="1145">11.45 - 12.30</option><option value="1330">13.30 - 14.15</option><option value="1430">14.30 - 15.15</option><option value="1530">15.30 - 16.15</option><option value="1630">16.30 - 17.15</option></select>'); //add input box
 	});	
+
+	user.setupWeeklyCourseScheduleHelper();
+
 
 
 </script>

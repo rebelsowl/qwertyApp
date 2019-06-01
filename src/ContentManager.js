@@ -139,4 +139,14 @@ module.exports = class ContentManager {
 			}
 		});
 	}
+	setupWeeklyCourseScheduleHelper(){
+		var DBResult=DBHandler.setupWeeklyCourseScheduleHelperDB();
+		DBResult.then(function(courseCodes) {
+            courseCodes.forEach(function(Course) {
+                $("#coursesl").append(
+                    "<option value="+Course+">CENG"+Course+"</option>"
+                );
+            });
+        });
+	}
 }
