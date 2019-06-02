@@ -11,6 +11,8 @@ var CourseClass = require('./Course.js');
 var InstructorClass = require('./Instructor.js');
 //Assistant object
 var AssistantClass = require('./Assistant.js');
+//Schedule object
+var ScheduleClass = require('./Schedule.js');
 
 module.exports = class ContentManager {
 	constructor(username){
@@ -152,7 +154,7 @@ module.exports = class ContentManager {
 	setupWeeklyCourseSchedule(courseCode, day, hours){
 		hours.forEach(function(hour) {
 			console.log(hour);
-  			var a = new Schedule(Number(courseCode),Number(day),Nummber(hour));
+  			var a = new ScheduleClass(Number(courseCode),Number(day),Nummber(hour));
   			var DBResult = DBHandler.setupWeeklyCourseScheduleDB(a);
   			DBResult.then(function(returnedValue) {
 				if(returnedValue = 1){
