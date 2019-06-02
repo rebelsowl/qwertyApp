@@ -36,7 +36,7 @@
   				</div>
  				<br> <br>
 			  <div class="form-actions">
-			    <button id="form-button" type="submit" class="btn btn-form btn-primary" >SAVE</button>
+			    <button id="setupScheduleButton" type="submit" class="btn btn-form btn-primary" >SAVE</button>
 			  </div>
 			</form>
           </div>
@@ -55,6 +55,11 @@
 	});	
 
 	user.setupWeeklyCourseScheduleHelper();
+
+	$("#setupScheduleButton").click(function(e){
+		e.preventDefault();
+		setupScheduleClicked();
+	});
 
 
 

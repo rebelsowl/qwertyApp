@@ -277,5 +277,37 @@ module.exports = class DBHandler {
 		return result;
 	}
 
+	setupWeeklyCourseScheduleDB(schedule){
+		let query = "INSERT INTO `Schedule`(`course_code`, `course_day`, `course_time`) VALUES (";
+   		query+= schedule.courseCode;
+   		query+=",";
+   		query+=schedule.courdeDay;
+   		query+="',";
+   		query+=schedule.courseTime;
+   		query+=");";
+		console.log(query);
+		
+		var result = connection.promise().query(query)
+	    .then( ([rows,fields]) => {
+		    return connection.promise().query(query);
+	    }).catch( err => {
+			alert(err);
+			console.log(err);
+    	});
+
+		return result;	
+	}
+
+
+
+
+
+
+
+
+
+
+
 
 }
+

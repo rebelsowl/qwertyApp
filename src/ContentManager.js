@@ -149,4 +149,16 @@ module.exports = class ContentManager {
             });
         });
 	}
+	setupWeeklyCourseSchedule(courseCode, day, hours){
+		hours.forEach(function(hour) {
+  			var a = new Schedule(courseCode,day,hour);
+  			var DBResult = DBHandler.setupWeeklyCourseScheduleDB(a);
+  			DBResult.then(function(returnedValue) {
+				if(returnedValue = 1){
+		     	   $('#select-courses-for-semester-form')[0].reset();  
+					alert("Course schedule set")
+				}
+			});
+		});
+	}
 }
