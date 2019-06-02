@@ -158,7 +158,10 @@ module.exports = class ContentManager {
   			var DBResult = DBHandler.setupWeeklyCourseScheduleDB(a);
   			DBResult.then(function(returnedValue) {
 				if(returnedValue = 1){
-		     	   $('#select-courses-for-semester-form')[0].reset();  
+
+		     	   $( "#content" ).load("../views/setup-course.html".getAttribute("href"));
+		     	     
+
 					alert("Course schedule set")
 				}
 			});

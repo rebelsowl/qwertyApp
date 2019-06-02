@@ -278,12 +278,12 @@ module.exports = class DBHandler {
 	}
 
 	setupWeeklyCourseScheduleDB(schedule){
-		let query = "INSERT INTO `Schedule`(`course_code`, `course_day`, `course_time`) VALUES (";
+		let query = "INSERT INTO `Schedule`(`course_code`, `course_time`, `course_day`) VALUES (";
    		query+= schedule.courseCode;
    		query+=",";
-   		query+=schedule.courseDay;
-   		query+=",";
    		query+=schedule.courseTime;
+   		query+=",";
+   		query+=schedule.courseDay;
    		query+=");";
 		console.log(query);
 		
