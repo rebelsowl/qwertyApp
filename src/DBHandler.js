@@ -281,8 +281,8 @@ module.exports = class DBHandler {
 		let query = "INSERT INTO `Schedule`(`course_code`, `course_day`, `course_time`) VALUES (";
    		query+= schedule.courseCode;
    		query+=",";
-   		query+=schedule.courdeDay;
-   		query+="',";
+   		query+=schedule.courseDay;
+   		query+=",";
    		query+=schedule.courseTime;
    		query+=");";
 		console.log(query);
