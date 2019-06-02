@@ -64,7 +64,7 @@ module.exports = class ContentManager {
 		if(typeof courseCode === 'undefined'){
 			DBResult.then(function(courseObjects) {
 				courseObjects.forEach(function(Course) {
-				    $("#coursesl").append(
+				    $("#course-select").append(
 						"<option value="+Course.courseCode+">CENG"+Course.courseCode+"</option>"
 				    );
 				});
@@ -90,7 +90,6 @@ module.exports = class ContentManager {
 						//First create input boxes
 						for (i = 0; i < Course.instructors.length; i++) {
 							$( "#addInstructor" ).click();
-							alert("click");
 						}
 						for (i = 0; i < Course.assistants.length; i++) {
 							$( "#addAssistant" ).click();
