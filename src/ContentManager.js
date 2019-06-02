@@ -159,7 +159,7 @@ module.exports = class ContentManager {
   			DBResult.then(function(returnedValue) {
 				if(returnedValue = 1){
 
-		     	   $( "#content" ).load("../views/setup-course.html");
+		     	   $( "#content" ).load("views/setup-course.html");
 		     	     
 
 					alert("Course schedule set")
