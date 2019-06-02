@@ -151,7 +151,8 @@ module.exports = class ContentManager {
 	}
 	setupWeeklyCourseSchedule(courseCode, day, hours){
 		hours.forEach(function(hour) {
-  			var a = new Schedule(courseCode,day,hour);
+			console.log(hour);
+  			var a = new Schedule(Number(courseCode),Number(day),Nummber(hour));
   			var DBResult = DBHandler.setupWeeklyCourseScheduleDB(a);
   			DBResult.then(function(returnedValue) {
 				if(returnedValue = 1){
