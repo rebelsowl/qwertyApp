@@ -184,6 +184,7 @@ module.exports = class DBHandler {
 	
 	editCourseDB(courseObject){
 		//First delete old informations then add new infos
+		console.log(courseObject);
 		
 		let query = "DELETE FROM `Instructors` WHERE `course_code` = "+courseObject.courseCode;
 		
@@ -199,22 +200,31 @@ module.exports = class DBHandler {
 			query += `VALUES (${courseObject.courseCode}, ${courseObject.courseCredit}, ${courseObject.courseEcts}, '${courseObject.courseName}', ${courseObject.coursePrequirities}, ${courseObject.mandatory}, ${courseObject.active}, ${courseObject.semester})`;
 		    return connection.promise().query(query);
 	    }).then( ([rows,fields]) => {
-			console.log(rows);
+			
 			let query = "INSERT INTO Assistants VALUES ";
 			courseObject.assistants.assistantName.forEach(function(row) {
 				query += `(${courseObject.courseCode}, '${row}'),`;
 			});
 			//Delete the last comma to prevent SQL Error
 			query = query.substring(0, query.length-1);
+			
+			//if no rows found return 1
+			console.log(courseObject.assistants.assistantName.length);
+			if (courseObject.assistants.assistantName.length == 0) query = "SELECT version()";
+			
 		    return connection.promise().query(query);
 	    }).then( ([rows,fields]) => {
-			console.log(rows);
+						
 			let query = "INSERT INTO Instructors VALUES ";
 			courseObject.instructors.instructorName.forEach(function(row) {
 				query += `(${courseObject.courseCode}, '${row}'),`;
 			});
 			//Delete the last comma to prevent SQL Error
 			query = query.substring(0, query.length-1);
+			
+			//if no rows found return 1
+			if (courseObject.instructors.instructorName.length == 0) query = "SELECT version()";
+			
 		    return connection.promise().query(query);
 	    }).catch( err => {
 			alert(err);
