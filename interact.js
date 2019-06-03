@@ -7,6 +7,7 @@ var AssistantClass = require('./src/Assistant.js');
 var CourseClass = require('./src/Course.js');
 
 
+
 function showCoursesClicked() {
 	user.showCourses();
 }
@@ -16,7 +17,7 @@ function addCourseClicked() {
 	    obj[item.name] = item.value;
 	    return obj;
 	}, {});
-	
+		
 	//Make checkboxes 1 or 0
 	if(data.active=="on") data.active=1;
 	else data.active=0;
@@ -107,5 +108,22 @@ function selectCourseClicked() {
 	console.log(data.semester);
 	console.log(data.coursesl);
 	user.selectCoursesForSemester(data.coursesl,data.semester);
+	
+}
+
+function addMailClicked() {
+	var data = $('form').serializeArray().reduce(function(obj, item) {
+	    obj[item.name] = item.value;
+	    return obj;
+	}, {});
+	if(data.group=="instructors") data.group="instructors";
+	else if(data.group=="assistants") data.group="assistants";
+	else if(data.group=="first-grade") data.group="first-grade";
+	else if(data.group=="second-grade") data.group="second-grade";
+	else if(data.group=="third-grade") data.group="third-grade";
+	else if(data.group=="fourth-grade") data.group="fourth-grade";
+	console.log(data.group);
+	console.log(data.emailName);
+	user.addEmail(data.group,data.emailName);
 	
 }

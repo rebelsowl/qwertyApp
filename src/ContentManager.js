@@ -11,6 +11,9 @@ var CourseClass = require('./Course.js');
 var InstructorClass = require('./Instructor.js');
 //Assistant object
 var AssistantClass = require('./Assistant.js');
+//Email object
+var EmailClass = require('./Email.js');
+
 
 module.exports = class ContentManager {
 	constructor(username){
@@ -132,6 +135,16 @@ module.exports = class ContentManager {
     }
 	selectCoursesForSemester(course, semester){
 		var DBResult = DBHandler.selectCoursesForSemesterDB(course, semester);
+		DBResult.then(function(returnedValue) {
+			if(returnedValue = 1){
+		        $('#select-courses-for-semester-form')[0].reset();  
+				alert("Course Semester set")
+			}
+		});
+	}	
+	addEmail(emailGroup,emailName){
+		var EmailObject = new EmailClass(emailGroup,emailName);
+		var DBResult = DBHandler.addEmailDB(EmailObject);
 		DBResult.then(function(returnedValue) {
 			if(returnedValue = 1){
 		        $('#select-courses-for-semester-form')[0].reset();  
