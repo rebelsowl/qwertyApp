@@ -109,3 +109,13 @@ function selectCourseClicked() {
 	user.selectCoursesForSemester(data.coursesl,data.semester);
 	
 }
+
+function deleteCourseClicked() {
+	var data = $('form').serializeArray().reduce(function(obj, item) {
+	    obj[item.name] = item.value;
+	    return obj;
+	}, {});
+	
+	user.deleteCourse(data.coursesl);
+	
+}
