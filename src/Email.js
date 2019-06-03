@@ -3,5 +3,5 @@ module.exports = class Email {
         this.emailGroup = emailGroup;
         this.emailName=emailName;
 
-	
+    }
 }

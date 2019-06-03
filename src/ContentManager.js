@@ -11,6 +11,8 @@ var CourseClass = require('./Course.js');
 var InstructorClass = require('./Instructor.js');
 //Assistant object
 var AssistantClass = require('./Assistant.js');
+//Email object
+var EmailClass = require('./Email.js');
 
 
 module.exports = class ContentManager {
@@ -145,8 +147,8 @@ module.exports = class ContentManager {
 		var DBResult = DBHandler.addEmailDB(EmailObject);
 		DBResult.then(function(returnedValue) {
 			if(returnedValue = 1){
-		        $('#select-courses-for-semester-form')[0].reset();  
-				alert("Course Semester set")
+		        $('#add-email')[0].reset();  
+				alert("Email is added")
 			}
 		});
 	}
