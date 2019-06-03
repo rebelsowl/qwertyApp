@@ -138,4 +138,24 @@ module.exports = class ContentManager {
 			}
 		});
 	}
+	deleteCourseHelper(){
+        var DBResult =DBHandler.deleteCourseHelperDB();
+        DBResult.then(function(courseCodes) {
+            courseCodes.forEach(function(Course) {
+                $("#coursesl").append(
+                    "<option value="+Course+">CENG"+Course+"</option>"
+                );
+            });
+        });
+    }
+	deleteCourse(course){
+		var DBResult = DBHandler.deleteCourseDB(course);
+		DBResult.then(function(returnedValue) {
+			if(returnedValue = 1){
+				$( "#content" ).load("views/delete-course.html");
+				alert("Course Deleted");
+				
+			}
+		});
+	}
 }
