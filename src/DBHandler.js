@@ -271,6 +271,45 @@ module.exports = class DBHandler {
 		return result;
 	}
 	
+	deleteCourseHelperDB(){
+		//Create Course Objects
+		var courseCodes = [];
+		// Perform a query
+		let $query = 'SELECT * FROM Courses';
+		var result = connection.promise().query($query)
+	    .then( ([rows,fields]) => {
+	    	for (i = 0; i < rows.length; i++) {
+				var currentRow = rows[i];
+				var code = currentRow["course_code"];
+			 	courseCodes.push(code);				
+			}
+			return courseCodes
+		});
+		return result;
+
+	}
+
+	deleteCourseDB(course){
+		//delete the course
+		console.log(course);
+		
+		let query = "DELETE FROM `Instructors` WHERE `course_code` = "+course;
+		
+		var result = connection.promise().query(query)
+	    .then( ([rows,fields]) => {
+			query = "DELETE FROM `Assistants` WHERE `course_code` = "+course;
+		    return connection.promise().query(query);
+	    }).then( ([rows,fields]) => {
+			query = "DELETE FROM `Schedule` WHERE `course_code` = "+course;
+		    return connection.promise().query(query);
+	    }).then( ([rows,fields]) => {
+			query = "DELETE FROM `Courses` WHERE `course_code` = "+course;
+		    return connection.promise().query(query);
+	    });
+
+		return result;
+	}
+	
 
 
 }

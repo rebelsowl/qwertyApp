@@ -1,15 +1,23 @@
-          <div class="pane-form">			  
-			<form>
-			  <div class="form-group">
-			    <label>Username</label>
-			    <input name="username" type="input" class="form-control" placeholder="Username">
-			  </div>
-			  <div class="form-group">
-			    <label>Password</label>
-			    <input name="password" type="password" class="form-control" placeholder="Password">
-			  </div>
-			  <div class="form-actions">
-			    <button id="form-button" type="submit" class="btn btn-form btn-primary" onClick="render.addcontentmanager()">OK</button>
-			  </div>
-			</form>
-          </div>
+  <div class="pane-form">			  
+	<form id="delete-course-form">
+	  <div class="form-group">
+	    <label>Choose Course</label>
+	    <select id="coursesl" name="coursesl" class="form-control">
+	    </select>
+	  </div>
+	  <div class="form-actions">
+	    <button id="deleteCourseButton" type="submit" class="btn btn-form btn-primary">Delete</button>  <!-- d]]]]]-->
+	  </div>
+	</form>
+  </div>
+  
+  <script>
+  	user.deleteCourseHelper();	
+	
+  	$("#deleteCourseButton").click(function(e){
+  		e.preventDefault();
+  		deleteCourseClicked();
+  	});
+
+
+  </script>
