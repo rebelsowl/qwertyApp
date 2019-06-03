@@ -11,8 +11,6 @@ var CourseClass = require('./Course.js');
 var InstructorClass = require('./Instructor.js');
 //Assistant object
 var AssistantClass = require('./Assistant.js');
-//Email object
-var EmailClass = require('./Email.js');
 
 
 module.exports = class ContentManager {
