@@ -1,15 +1,46 @@
           <div class="pane-form">			  
-			<form>
+			<form id="select-courses-for-semester-form">
 			  <div class="form-group">
-			    <label>Username</label>
-			    <input name="username" type="input" class="form-control" placeholder="Username">
-			  </div>
+    			<label>Email</label>
+    			<input name="emailName" type="text" class="form-control" >
+ 			  </div>
 			  <div class="form-group">
-			    <label>Password</label>
-			    <input name="password" type="password" class="form-control" placeholder="Password">
+			    <label>Email Group</label>
+			    <select id="group" name="group"class="form-control">
+			    	<option value="instructors">Instructors</option>
+			    	<option value="assistants">Assistants</option>
+			    	<option value="first-grade">First Grade</option>
+			    	<option value="second-grade">Second Grade</option>
+			    	<option value="third-grade">Third Grad</option>
+			    	<option value="fourth-grade">Fourth Grade</option>
+      </select>
 			  </div>
 			  <div class="form-actions">
-			    <button id="form-button" type="submit" class="btn btn-form btn-primary" onClick="render.addcontentmanager()">OK</button>
+			    <button id="emailAdd" type="submit" class="btn btn-form btn-primary">Save</button>  <!-- d]]]]]-->
 			  </div>
 			</form>
           </div>
+<script>
+  //Button click listener
+	$("#emailAdd").click(function(e){
+		e.preventDefault();
+		//First control the form
+	  if (!addMailFormControl()) addMailClicked();
+	});
+	//Form Control
+	function addMailFormControl(){
+		var empty = false;
+		$('input[type="text"]').each(function(){
+		   if($(this).val()==""){
+			   empty=true;
+			   $(this).focus(); //Focus on field
+			   return false;
+		    }
+		 });
+		 		 
+		 if(empty==true){
+		 	alert("Please fill in the form");
+			return empty;
+		 }
+	}
+</script>
