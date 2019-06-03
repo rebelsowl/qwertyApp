@@ -147,7 +147,7 @@ module.exports = class ContentManager {
 		var DBResult = DBHandler.addEmailDB(EmailObject);
 		DBResult.then(function(returnedValue) {
 			if(returnedValue = 1){
-		        $('#add-email')[0].reset();  
+		        $('#select-courses-for-semester-form')[0].reset();  
 				alert("Email is added")
 			}
 		});

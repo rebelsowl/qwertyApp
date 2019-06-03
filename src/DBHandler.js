@@ -260,7 +260,24 @@ module.exports = class DBHandler {
 
 		return result;
 	}
-	
+	addEmailDB(EmailObject){
+		// Perform a query
+		
+		let query = "INSERT INTO Email (`group`, `mail`) ";
+		query += `VALUES ('${EmailObject.emailGroup}', '${EmailObject.emailName}')`;
+		console.log(query);
+		
+		var result = connection.promise().query(query)
+	    .then( ([rows,fields]) => {
+		    return 1;
+	    }).catch( err => {
+			alert(err);
+			console.log(err);
+    	});
+
+		return result;
+		
+	}
 
 
 }
