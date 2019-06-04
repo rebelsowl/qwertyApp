@@ -365,5 +365,52 @@ module.exports = class DBHandler {
 		return result;	
 	}
 
+	showEmailsDB(){
+		
+	}
+	
+
+	importEmailListDB(){
+		
+	}
+		
+
+	editEmailHelperDB(){
+		
+	}
+	
+
+	editEmailDB(){
+		
+	}
+	
+	deleteEmailDB(){
+		
+	}
+	
+	deleteEmailHelperDB(){
+		
+	}
+	
+	getEmailListDB(){
+		
+	}
+	
+	addContentManagerDB(){
+		
+	}
+	
+	deleteContentManagerDB(){
+		
+	}
+	
+	deleteContentManagerHelperDB(){
+		
+	}
+	
+	getScheduleDB(){
+		
+	}
+	
 
 }

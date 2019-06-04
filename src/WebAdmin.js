@@ -10,5 +10,35 @@ module.exports = class WebAdmin extends ContentManager{
 		super(username);
 	}
 	
+	publishCourseSchedule(){
+		
+	}
+	
+
+	deleteContentManager(){
+		
+	}
+	
+
+	deleteContentManagerHelper(){
+		
+	}
+	
+
+	addContentManager(){
+		
+	}
+	
+
+	sendEventHelper(){
+		
+	}
+	
+
+	sendEvent(){
+		
+	}
+	
+	
 	
 }

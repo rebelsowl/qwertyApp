@@ -199,4 +199,34 @@ module.exports = class ContentManager {
 		});
 	}
 	
+
+	showEmails(){
+		
+	}
+
+
+	importEmailList(){
+		
+	}
+		
+
+	editEmail(){
+		
+	}
+	
+	editEmailHelper(){
+		
+	}
+	
+	deleteEmail(){
+		
+	}
+	
+
+	deleteEmailHelper(){
+		
+	}
+	
+	
+	
 }

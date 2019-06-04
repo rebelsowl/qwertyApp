@@ -1,4 +1,5 @@
 // All button clicks with gui handled here
+
 //Instructor object
 var InstructorClass = require('./src/Instructor.js');
 //Assistant object
@@ -162,3 +163,40 @@ function setupScheduleClicked(){
 
 	user.setupWeeklyCourseSchedule(data.coursesl,data.day,hoursArray);
 }
+
+function publishCourseAndScheduleClicked() {
+	
+}
+
+
+function showEmailsClicked() {
+	
+}
+
+
+function importEmailsClicked() {
+	
+}
+
+
+function editEmailClicked() {
+	
+}
+
+function deleteEmailClicked() {
+	
+}
+
+function sendEventClicked() {
+	
+}
+
+function addContentManagerClicked() {
+	
+}
+
+function deleteContentManagerClicked() {
+	
+}
+
+
