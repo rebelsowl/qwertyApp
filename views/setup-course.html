@@ -1,15 +1,66 @@
           <div class="pane-form">			  
-			<form>
+			<form id="setup-course-schedule-form">
 			  <div class="form-group">
-			    <label>Username</label>
-			    <input name="username" type="input" class="form-control" placeholder="Username">
+			    <label>Choose Course</label>
+			    <select id="coursesl"name="coursesl" class="form-control">
+			    </select>
 			  </div>
 			  <div class="form-group">
-			    <label>Password</label>
-			    <input name="password" type="password" class="form-control" placeholder="Password">
+			    <label>Choose day</label>
+			    <select id="day"name="day" class="form-control">
+			    	<option value="d1">Monday</option>
+			    	<option value="d2">Tuesday</option>
+			    	<option value="d3">Wednesday</option>
+			    	<option value="d4">Thursday</option>
+			    	<option value="d5">Friday</option>
+			    </select>
 			  </div>
+			    <div class="form-group" id="hourWrapper">
+    				<label>Choose Hour #1</label>
+    				<select id="hours1"name="hours1" class="form-control">
+			    		<option value="845">8.45 - 9.30</option>
+			    		<option value="945">9.45 - 10.30</option>
+			    		<option value="1045">10.45 - 11.30</option>
+			    		<option value="1145">11.45 - 12.30</option>
+			    		<option value="1330">13.30 - 14.15</option>
+			    		<option value="1430">14.30 - 15.15</option>
+			    		<option value="1530">15.30 - 16.15</option>
+			    		<option value="1630">16.30 - 17.15</option>
+			    	</select>
+
+ 				 </div>
+ 				 <div class="btn-group">
+  	 				 <button class="btn btn-large btn-default" id="addHour">
+    	 			 <span class="icon icon-plus-circled"></span> Add New Hour
+  	 				 </button>
+  				</div>
+ 				<br> <br>
 			  <div class="form-actions">
-			    <button id="form-button" type="submit" class="btn btn-form btn-primary" onClick="render.addcontentmanager()">OK</button>
+			    <button id="setupScheduleButton" type="submit" class="btn btn-form btn-primary" >SAVE</button>
 			  </div>
 			</form>
           </div>
+
+
+<script >
+	//Add Hour Dynamic
+	var wrapperh 		= $("#hourWrapper"); //Fields wrapper
+	var add_button_hour      = $("#addHour");
+	
+	var yi = 1; //initlal text box count
+	$(add_button_hour).click(function(e){ //on add input button click
+		e.preventDefault();
+		yi++; //text box increment
+		$(wrapperh).append('<label>Choose Hour #'+yi+'</label><select id="hours'+yi+'"name="hours'+yi+'" class="form-control"><option value="845">8.45 - 9.30</option><option value="945">9.45 - 10.30</option><option value="1045">10.45 - 11.30</option><option value="1145">11.45 - 12.30</option><option value="1330">13.30 - 14.15</option><option value="1430">14.30 - 15.15</option><option value="1530">15.30 - 16.15</option><option value="1630">16.30 - 17.15</option></select>'); //add input box
+	});	
+
+	user.setupWeeklyCourseScheduleHelper();
+
+	$("#setupScheduleButton").click(function(e){
+		e.preventDefault();
+		setupScheduleClicked();
+	});
+
+
+
+</script>

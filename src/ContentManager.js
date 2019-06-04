@@ -13,6 +13,8 @@ var InstructorClass = require('./Instructor.js');
 var AssistantClass = require('./Assistant.js');
 //Email object
 var EmailClass = require('./Email.js');
+//Schedule object
+var ScheduleClass = require('./Schedule.js');
 
 module.exports = class ContentManager {
 	constructor(username){
@@ -170,4 +172,31 @@ module.exports = class ContentManager {
 			}
 		});
 	}
+	setupWeeklyCourseScheduleHelper(){
+		var DBResult=DBHandler.setupWeeklyCourseScheduleHelperDB();
+		DBResult.then(function(courseCodes) {
+            courseCodes.forEach(function(Course) {
+                $("#coursesl").append(
+                    "<option value="+Course+">CENG"+Course+"</option>"
+                );
+            });
+        });
+	}
+	setupWeeklyCourseSchedule(courseCode, day, hours){
+		hours.forEach(function(hour) {
+			console.log(hour);
+  			var a = new ScheduleClass(Number(courseCode),Number(day),Number(hour));
+  			var DBResult = DBHandler.setupWeeklyCourseScheduleDB(a);
+  			DBResult.then(function(returnedValue) {
+				if(returnedValue = 1){
+
+		     	   $( "#content" ).load("views/setup-course.html");
+		     	     
+
+					alert("Course schedule set")
+				}
+			});
+		});
+	}
+	
 }

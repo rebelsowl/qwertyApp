@@ -136,3 +136,29 @@ function addMailClicked() {
 	user.addEmail(data.group,data.emailName);
 	
 }
+
+function setupScheduleClicked(){
+	var data = $('form').serializeArray().reduce(function(obj, item) {
+	    obj[item.name] = item.value;
+	    return obj;
+	}, {});
+	if (data.day =="d1") data.day=1;
+	else if(data.day=="d2") data.day=2;
+	else if(data.day=="d3") data.day=3;
+	else if(data.day=="d4") data.day=4;
+	else if(data.day=="d5") data.day=5;
+
+	hoursArray=[];
+	xi=1;
+	while(data["hours"+xi] != undefined){
+		hoursArray.push(data["hours"+xi]);
+		xi++;
+	}
+	console.log(data.coursesl);
+	console.log(data.day);
+	hoursArray.forEach(function(element) {
+  		console.log(element);
+	});
+
+	user.setupWeeklyCourseSchedule(data.coursesl,data.day,hoursArray);
+}
