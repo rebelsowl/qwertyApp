@@ -201,7 +201,9 @@ module.exports = class ContentManager {
 	
 
 	showEmails(){
-		
+		wdaknadwndwankdjaw
+		wakadwkdawk
+		adjdwj
 	}
 
 
