@@ -201,9 +201,6 @@ module.exports = class ContentManager {
 	
 
 	showEmails(){
-		wdaknadwndwankdjaw
-		wakadwkdawk
-		adjdwj
 	}
 
 
@@ -217,8 +214,6 @@ module.exports = class ContentManager {
 	}
 	
 	editEmailHelper(){
-		wadjndakwndwkadwkadwa
-		adwdawkadwdwkm
 	}
 	
 	deleteEmail(){
