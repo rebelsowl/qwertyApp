@@ -327,6 +327,43 @@ module.exports = class DBHandler {
 		return result;
 		
 	}
+	setupWeeklyCourseScheduleHelperDB(){
+		//Create Course Objects
+		var courseCodes = [];
+		// Perform a query
+		let $query = 'SELECT * FROM Courses';
+		var result = connection.promise().query($query)
+	    .then( ([rows,fields]) => {
+	    	for (i = 0; i < rows.length; i++) {
+				var currentRow = rows[i];
+				var code = currentRow["course_code"];
+			 	courseCodes.push(code);				
+			}
+			return courseCodes
+		});
+		return result;
+	}
+
+	setupWeeklyCourseScheduleDB(schedule){
+		let query = "INSERT INTO `Schedule`(`course_code`, `course_time`, `course_day`) VALUES (";
+   		query+= schedule.courseCode;
+   		query+=",";
+   		query+=schedule.courseTime;
+   		query+=",";
+   		query+=schedule.courseDay;
+   		query+=");";
+		console.log(query);
+		
+		var result = connection.promise().query(query)
+	    .then( ([rows,fields]) => {
+		    return connection.promise().query(query);
+	    }).catch( err => {
+			alert(err);
+			console.log(err);
+    	});
+
+		return result;	
+	}
 
 
 }
