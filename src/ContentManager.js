@@ -215,7 +215,8 @@ module.exports = class ContentManager {
 	}
 	
 	editEmailHelper(){
-		
+		wadjndakwndwkadwkadwa
+		adwdawkadwdwkm
 	}
 	
 	deleteEmail(){
