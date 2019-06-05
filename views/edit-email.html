@@ -2,7 +2,7 @@
 	<form id="edit-email-form">
 		<div class="form-group">
 			<label>Email Group</label>
-			<select id="emailgroup1"name="emailgroupl" class="form-control">
+			<select id="emailgroup"name="emailgroup" class="form-control">
 				<option value="instructors">Instructors</option>
 		    	<option value="assistants">Assistants</option>
 		    	<option value="first-grade">First Grade</option>
@@ -11,7 +11,7 @@
 		    	<option value="fourth-grade">Fourth Grade</option>
 			</select>
 			<label> Email</label>
-			<select id="emailname1"name="emailnamel" class="form-control">
+			<select id="emailname"name="emailname" class="form-control">
 			</select>
 		</div>
 		<div class="form-group">
@@ -24,13 +24,14 @@
 	</form>
 		</div>
 <script >
-	var e = document.getElementById("emailgroup1");
-	var strUser = e.options[e.selectedIndex].value;
-	console.log(strUser);
-	if(strUser=="instructors"){
-		console.log("oldu");
-		user.editEmailHelper();
-	}
+	$("#emailgroup").change(function() {
+	//Store the selected email group
+    var selectedMail = $(this).children("option:selected").val();
+	//Reset the form
+	$('#edit-email-form')[0].reset();  
+	user.editEmailHelper(selectedMail);
+	});
+
 
 
 	$("#editMailButton").click(function(e){

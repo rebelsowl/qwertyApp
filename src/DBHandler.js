@@ -312,7 +312,7 @@ module.exports = class DBHandler {
 	addEmailDB(EmailObject){
 		// Perform a query
 		
-		let query = "INSERT INTO Email (`group`, `mail`) ";
+		let query = "INSERT INTO Email (`mailgroup`, `mail`) ";
 		query += `VALUES ('${EmailObject.emailGroup}', '${EmailObject.emailName}')`;
 		console.log(query);
 		
@@ -375,11 +375,12 @@ module.exports = class DBHandler {
 	}
 		
 
-	editEmailHelperDB(){
+	editEmailHelperDB(mailgroup){
 		//Create Course Objects
 		var emails = [];
 		// Perform a query
-		let $query = 'SELECT mail FROM `Email` WHERE mailgroup = "instructors"' 
+		let $query = "SELECT mail FROM `Email` WHERE mailgroup = " +  "'" + mailgroup + "'";
+		
 		var result = connection.promise().query($query)
 	    .then( ([rows,fields]) => {
 	    	for (i = 0; i < rows.length; i++) {
@@ -393,16 +394,17 @@ module.exports = class DBHandler {
 	}
 	
 
-	editEmailDB(emailObject){
+	editEmailDB(emailObject,oldmail){
 	//First delete old informations then add new infos
 	console.log(emailObject);
-		
-	let query = "DELETE FROM `Email` WHERE `mail` = "+emailObject.emailName;
-	
+	console.log(oldmail);
+
+	let query = "DELETE FROM `Email` WHERE `mail` = "+"'" +oldmail +"'";
 	var result = connection.promise().query(query)
 		.then( ([rows,fields]) => {
-		query = "INSERT INTO Email (`groupname`, `mail`) ";
-		query += `VALUES (${emailObject.emailGroup}, ${emailObject.emailName})`;
+		query = "INSERT INTO Email (`mailgroup`, `mail`) ";
+		query += `VALUES ('${emailObject.emailGroup}', '${emailObject.emailName}')`;
+		console.log(query);
 			return connection.promise().query(query);
 		}).catch( err => {
 		alert(err);
