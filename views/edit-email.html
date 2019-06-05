@@ -1,15 +1,56 @@
-          <div class="pane-form">			  
-			<form>
-			  <div class="form-group">
-			    <label>Username</label>
-			    <input name="username" type="input" class="form-control" placeholder="Username">
-			  </div>
-			  <div class="form-group">
-			    <label>Password</label>
-			    <input name="password" type="password" class="form-control" placeholder="Password">
-			  </div>
-			  <div class="form-actions">
-			    <button id="form-button" type="submit" class="btn btn-form btn-primary" onClick="render.addcontentmanager()">OK</button>
-			  </div>
-			</form>
-          </div>
+		<div class="pane-form">			  
+	<form id="edit-email-form">
+		<div class="form-group">
+			<label>Email Group</label>
+			<select id="emailgroup1"name="emailgroupl" class="form-control">
+				<option value="instructors">Instructors</option>
+		    	<option value="assistants">Assistants</option>
+		    	<option value="first-grade">First Grade</option>
+		    	<option value="second-grade">Second Grade</option>
+		    	<option value="third-grade">Third Grade</option>
+		    	<option value="fourth-grade">Fourth Grade</option>
+			</select>
+			<label> Email</label>
+			<select id="emailname1"name="emailnamel" class="form-control">
+			</select>
+		</div>
+		<div class="form-group">
+			<label>New Email</label>
+			<input name="newemail" type="text" id="newemail"  class="form-control">
+		</div>
+		<div class="form-actions">
+			<button id="editMailButton" type="submit" class="btn btn-form btn-primary" >SAVE</button>
+		</div>
+	</form>
+		</div>
+<script >
+	var e = document.getElementById("emailgroup1");
+	var strUser = e.options[e.selectedIndex].value;
+	console.log(strUser);
+	if(strUser=="instructors"){
+		console.log("oldu");
+		user.editEmailHelper();
+	}
+
+
+	$("#editMailButton").click(function(e){
+		e.preventDefault();
+		if (!editMailFormControl()) editEmailClicked();
+	});
+	function editMailFormControl(){
+		var empty = false;
+		$('input[type="text"]').each(function(){
+		   if($(this).val()==""){
+			   empty=true;
+			   $(this).focus(); //Focus on field
+			   return false;
+		    }
+		 });
+		 		 
+		 if(empty==true){
+		 	alert("Please fill in the form");
+			return empty;
+		 }
+	}
+
+</script>

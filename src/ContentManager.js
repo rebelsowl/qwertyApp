@@ -209,11 +209,26 @@ module.exports = class ContentManager {
 	}
 		
 
-	editEmail(){
-		
+	editEmail(emailObject){
+		var DBResult = DBHandler.editEmailDB(emailObject);
+		DBResult.then(function(returnedValue) {
+			if(returnedValue = 1){
+		        $('#add-course-form')[0].reset();  
+				alert("Email Updated Succesfully")
+			}
+		});
 	}
 	
 	editEmailHelper(){
+		var DBResult=DBHandler.editEmailHelperDB();
+		DBResult.then(function(emails) {
+			console.log(emails);
+            emails.forEach(function(email) {
+                $("#emailname1").append(
+                    "<option value="+email+">"+email+"</option>"
+                );
+            });
+        });
 	}
 	
 	deleteEmail(){
