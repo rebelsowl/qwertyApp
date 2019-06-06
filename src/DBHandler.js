@@ -21,7 +21,8 @@ connection.connect(function(err) {
 
 //Course object
 var CourseClass = require('./Course.js');
-
+//Email object
+var EmailClass = require('./Email.js');
 
 module.exports = class DBHandler {
 
@@ -385,11 +386,32 @@ module.exports = class DBHandler {
 	}
 	
 	deleteEmailDB(){
+		//delete the email
+		console.log("DB Mail: " + mail);
+		let $query = "DELETE FROM `Email` WHERE `mail` = " + "'" + mail + "'";
 		
+		var result = connection.promise().query($query);
+		return result;
 	}
 	
 	deleteEmailHelperDB(){
-		
+		//Create Email Objects
+		var emails = [];
+		var currentEmail;
+		// Perform a query
+		let $query = 'SELECT * FROM Email';
+		var result = connection.promise().query($query)
+	    .then( ([rows,fields]) => {
+	    	for (i = 0; i < rows.length; i++) {
+				var currentRow = rows[i];
+				var group = currentRow["mailgroup"];
+				var mail = currentRow["mail"];
+				currentEmail = new EmailClass(group,mail);
+			 	emails.push(currentEmail);				
+			}
+			return emails
+		});
+		return result;
 	}
 	
 	getEmailListDB(){
