@@ -396,8 +396,18 @@ module.exports = class DBHandler {
 		
 	}
 	
-	addContentManagerDB(){
-		
+	addContentManagerDB(username, password){
+
+		let $query = "INSERT INTO Accounts (`username`, `password`, `account_type`) ";
+			$query += `VALUES (${"username"}, '${"password"}', 1)`;
+	    var result = connection.promise().query($query)
+	    .then( ([rows,fields]) => {
+				return 1;
+		}).catch( err => {
+			alert(err);
+			console.log(err);
+    	});
+			return result;
 	}
 	
 	deleteContentManagerDB(){

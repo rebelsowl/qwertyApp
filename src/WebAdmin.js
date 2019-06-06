@@ -25,8 +25,15 @@ module.exports = class WebAdmin extends ContentManager{
 	}
 	
 
-	addContentManager(){
-		
+	addContentManager(username, password){
+		var DBResult = DBHandler.addContentManagerDB(username,password);
+		DBResult.then(function(returnedValue) {
+			if(returnedValue = 1){
+		        $('#add-content-form')[0].reset();  
+				alert("Content Manager Added Succesfully")
+			}
+		});
+
 	}
 	
 

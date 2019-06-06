@@ -192,7 +192,14 @@ function sendEventClicked() {
 }
 
 function addContentManagerClicked() {
-	
+	var data = $('form').serializeArray().reduce(function(obj, item) {
+	    obj[item.name] = item.value;
+	    return obj;
+	}, {});
+
+	console.log(data["username"])
+	console.log(data["password"])
+	user.addContentManager(data["username"],data["password"]);
 }
 
 function deleteContentManagerClicked() {
