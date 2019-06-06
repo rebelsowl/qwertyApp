@@ -170,8 +170,9 @@ function publishCourseAndScheduleClicked() {
 
 
 function showEmailsClicked() {
-	
+	user.showEmails();
 }
+
 
 
 function importEmailsClicked() {

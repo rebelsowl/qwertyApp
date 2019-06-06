@@ -22,6 +22,8 @@ connection.connect(function(err) {
 //Course object
 var CourseClass = require('./Course.js');
 
+var EmailClass = require('./Email.js');
+
 
 module.exports = class DBHandler {
 
@@ -366,7 +368,26 @@ module.exports = class DBHandler {
 	}
 
 	showEmailsDB(){
+	    //Create Email Objects
+		var emailObjects = [];
 		
+		// Perform a query
+		let $query = 'SELECT * FROM Email';
+		var result = connection.promise().query($query)
+	    .then( ([rows,fields]) => {
+			for (i = 0; i < rows.length; i++) {
+				var currentRow = rows[i];
+				var Email = new EmailClass(currentRow["mailgroup"],currentRow["mail"]);
+				console.log(rows[i]["email"]);
+			 	emailObjects.push(Email);				
+			}
+			
+		
+			//Return completed Email object array
+			return emailObjects
+	    });
+					
+		return result;
 	}
 	
 
