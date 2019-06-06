@@ -217,12 +217,31 @@ module.exports = class ContentManager {
 	}
 	
 	deleteEmail(){
+		var DBResult = DBHandler.deleteEmailDB(email);
 		
+		DBResult.then(function(returnedValue) {
+			if(returnedValue = 1){
+				$( "#content" ).load("views/delete-email.html");
+				alert("Email Deleted");
+				
+			}else{
+				alert("Error: Email Not Deleted")
+			}
+		});
 	}
 	
 
 	deleteEmailHelper(){
-		
+		var DBResult =DBHandler.deleteEmailHelperDB();
+        DBResult.then(function(emails) {
+            emails.forEach(function(Email) {
+				
+				$("#email").append(
+                   "<option value="+Email.emailName+" id="+Email.emailGroup+">"+Email.emailName+"</option>"
+				);
+                
+            });
+        });
 	}
 	
 	
