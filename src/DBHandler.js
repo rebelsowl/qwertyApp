@@ -313,7 +313,7 @@ module.exports = class DBHandler {
 	addEmailDB(EmailObject){
 		// Perform a query
 		
-		let query = "INSERT INTO Email (`group`, `mail`) ";
+		let query = "INSERT INTO Email (`mailgroup`, `mail`) ";
 		query += `VALUES ('${EmailObject.emailGroup}', '${EmailObject.emailName}')`;
 		console.log(query);
 		
