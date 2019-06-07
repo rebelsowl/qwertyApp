@@ -385,12 +385,17 @@ module.exports = class DBHandler {
 		
 	}
 	
-	deleteEmailDB(){
+	deleteEmailDB(mail){
 		//delete the email
 		console.log("DB Mail: " + mail);
-		let $query = "DELETE FROM `Email` WHERE `mail` = " + "'" + mail + "'";
+		let $query = "DELETE FROM `Email` WHERE `mail` = '" + mail + "' ";
+		console.log($query);
 		
-		var result = connection.promise().query($query);
+		var result = connection.promise().query($query).catch( err => {
+			alert(err);
+			console.log(err);
+    	});
+		
 		return result;
 	}
 	

@@ -216,7 +216,7 @@ module.exports = class ContentManager {
 	editEmailHelper(){
 	}
 	
-	deleteEmail(){
+	deleteEmail(email){
 		var DBResult = DBHandler.deleteEmailDB(email);
 		
 		DBResult.then(function(returnedValue) {
