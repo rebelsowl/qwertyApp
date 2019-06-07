@@ -378,7 +378,6 @@ module.exports = class DBHandler {
 			for (i = 0; i < rows.length; i++) {
 				var currentRow = rows[i];
 				var Email = new EmailClass(currentRow["mailgroup"],currentRow["mail"]);
-				console.log(rows[i]["email"]);
 			 	emailObjects.push(Email);				
 			}
 			
