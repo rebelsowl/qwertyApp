@@ -22,8 +22,6 @@ connection.connect(function(err) {
 //Course object
 var CourseClass = require('./Course.js');
 
-var EmailClass = require('./Email.js');
-
 
 module.exports = class DBHandler {
 
