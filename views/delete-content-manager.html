@@ -2,13 +2,21 @@
 			<form>
 			  <div class="form-group">
 			    <label>Username</label> 
-			    <select name="username" class="form-control"> <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! BURAYI  DB YLE UYUMLU HALE GETIR                -->
-			    	<option selected value="Content Manager 1">Content Manager 1</option>
-			    	<option value="Content Manager 2">Content Magager 2</option>
+			    <select id="username1" name="username1" class="form-control"> <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! BURAYI  DB YLE UYUMLU HALE GETIR                -->
 			    </select>
 			  </div>
 			  <div class="form-actions">
-			    <button id="form-button" type="submit" class="btn btn-form btn-primary" onClick="render.deleteContentManager()">Delete Content Manager</button>
+			    <button id="deleteContentManagerButton" type="submit" class="btn btn-form btn-primary" >Delete Content Manager</button>
 			  </div>
 			</form>
-          </div>
+		  </div>
+		  <script>
+			user.deleteContentManagerHelper();	
+		  
+			$("#deleteContentManagerButton").click(function(e){
+				e.preventDefault();
+				deleteContentManagerClicked();
+			});
+	  
+	  
+		</script>
