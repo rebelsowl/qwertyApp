@@ -186,7 +186,6 @@ function editEmailClicked() {
 	    obj[item.name] = item.value;
 	    return obj;
 	}, {});
-	console.log(data.emailname);
 	var emailObject = new EmailClass(data.emailgroup,data.newemail);
 	user.editEmail(emailObject,data.emailname);
 		

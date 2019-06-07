@@ -28,8 +28,12 @@
 	//Store the selected email group
     var selectedMail = $(this).children("option:selected").val();
 	//Reset the form
-	$('#edit-email-form')[0].reset();  
+	$("#emailname")
+	.find('option')
+	.remove()
+	.end();  
 	user.editEmailHelper(selectedMail);
+
 	});
 
 
