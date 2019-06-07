@@ -1,15 +1,75 @@
           <div class="pane-form">			  
 			<form>
 			  <div class="form-group">
-			    <label>Username</label>
-			    <input name="username" type="input" class="form-control" placeholder="Username">
-			  </div>
-			  <div class="form-group">
-			    <label>Password</label>
-			    <input name="password" type="password" class="form-control" placeholder="Password">
-			  </div>
+			  <label>Email Group</label>
+			    <select id="group" name="group" class="form-control">
+					<option value="" disabled selected>Select Email</option>
+			    	<option value="instructors" id="instructors">Instructors</option>
+			    	<option value="assistants" id="assistants">Assistants</option>
+			    	<option value="first-grade" id="first-grade">First Grade</option>
+			    	<option value="second-grade" id="second-grade">Second Grade</option>
+			    	<option value="third-grade" id="third-grade">Third Grade</option>
+			    	<option value="fourth-grade" id="fourth-grade">Fourth Grade</option>
+				</select>
+				<br><br>
+			    <label>Email</label>
+			    <select id="email" name="email" class="form-control">
+				<option value="" disabled selected>Select Email</option>
+				</select>
+				
+				<br><br>
 			  <div class="form-actions">
-			    <button id="form-button" type="submit" class="btn btn-form btn-primary" onClick="render.addcontentmanager()">OK</button>
+			    <button id="deleteEmailButton" type="submit" class="btn btn-form btn-primary">OK</button>
 			  </div>
 			</form>
           </div>
+	
+	<script>
+		
+		
+		
+		$(document).ready(function() {
+			  $('#email').attr('disabled', true);
+		});
+		
+	</script>
+	
+	
+	<script>
+		
+		
+		$("#group").change(function(){
+			$('#email').val([]);
+			$('#email').attr('disabled', false);
+			$("#email > option").each(function(){
+				if(this.id == $("#group :selected").val()){
+					$(this).show();
+				}else{
+					$(this).hide();
+				}
+			});
+		});
+		
+	</script>
+	
+
+	<script>
+  	user.deleteEmailHelper();	
+	
+  	$("#deleteEmailButton").click(function(e){
+	
+  		e.preventDefault();
+		if (deleteEmailControl()) deleteEmailClicked();
+  	});
+	//Form Control
+	function deleteEmailControl(){
+		var empty = false;
+		if($("#group :selected").val() == "" || $("#email :selected").val() == "" || $("#email :selected").val() == null){
+			alert("Please fill in the form");
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+  </script>
