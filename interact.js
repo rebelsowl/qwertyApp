@@ -6,6 +6,8 @@ var InstructorClass = require('./src/Instructor.js');
 var AssistantClass = require('./src/Assistant.js');
 //Course object
 var CourseClass = require('./src/Course.js');
+//Email object
+var EmailClass = require('./src/Email.js')
 
 
 function showCoursesClicked() {
@@ -180,7 +182,13 @@ function importEmailsClicked() {
 
 
 function editEmailClicked() {
-	
+	var data = $('form').serializeArray().reduce(function(obj, item) {
+	    obj[item.name] = item.value;
+	    return obj;
+	}, {});
+	var emailObject = new EmailClass(data.emailgroup,data.newemail);
+	user.editEmail(emailObject,data.emailname);
+		
 }
 
 function deleteEmailClicked() {

@@ -167,7 +167,7 @@ module.exports = class ContentManager {
 		var DBResult = DBHandler.addEmailDB(EmailObject);
 		DBResult.then(function(returnedValue) {
 			if(returnedValue = 1){
-		        $('#select-courses-for-semester-form')[0].reset();  
+		        $('#add-email-form')[0].reset();  
 				alert("Email is added")
 			}
 		});
@@ -209,11 +209,26 @@ module.exports = class ContentManager {
 	}
 		
 
-	editEmail(){
-		
+	editEmail(emailObject,oldmail){
+		var DBResult = DBHandler.editEmailDB(emailObject,oldmail);
+		DBResult.then(function(returnedValue) {
+			if(returnedValue = 1){
+		        $('#edit-email-form')[0].reset();  
+				alert("Email is updated")
+			}
+		});
 	}
 	
-	editEmailHelper(){
+	editEmailHelper(mailgroup){
+		var DBResult=DBHandler.editEmailHelperDB(mailgroup);
+		DBResult.then(function(emails) {
+			console.log(emails);
+            emails.forEach(function(email) {
+                $("#emailname").append(
+                    "<option value="+email+">"+email+"</option>"
+                );
+            });
+        });
 	}
 	
 	deleteEmail(email){

@@ -376,13 +376,44 @@ module.exports = class DBHandler {
 	}
 		
 
-	editEmailHelperDB(){
+	editEmailHelperDB(mailgroup){
+		//Create Course Objects
+		var emails = [];
+		// Perform a query
+		let $query = "SELECT mail FROM `Email` WHERE mailgroup = " +  "'" + mailgroup + "'";
 		
+		var result = connection.promise().query($query)
+	    .then( ([rows,fields]) => {
+	    	for (i = 0; i < rows.length; i++) {
+				var currentRow = rows[i];
+				var mail = currentRow["mail"];
+			 	emails.push(mail);				
+			}
+			return emails
+		});
+		return result;
 	}
 	
 
-	editEmailDB(){
-		
+	editEmailDB(emailObject,oldmail){
+	//First delete old informations then add new infos
+	console.log(emailObject);
+	console.log(oldmail);
+
+	let query = "DELETE FROM `Email` WHERE `mail` = "+"'" +oldmail +"'";
+	var result = connection.promise().query(query)
+		.then( ([rows,fields]) => {
+		query = "INSERT INTO Email (`mailgroup`, `mail`) ";
+		query += `VALUES ('${emailObject.emailGroup}', '${emailObject.emailName}')`;
+		console.log(query);
+			return connection.promise().query(query);
+		}).catch( err => {
+		alert(err);
+		console.log(err);
+		});
+
+	return result;
+	
 	}
 	
 	deleteEmailDB(mail){
