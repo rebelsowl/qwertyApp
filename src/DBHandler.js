@@ -432,6 +432,20 @@ module.exports = class DBHandler {
 	}
 	
 	deleteContentManagerHelperDB(){
+		var usernames = [];
+		// Perform a query
+		let $query = 'SELECT * FROM Accounts';
+		var result = connection.promise().query($query)
+	    .then( ([rows,fields]) => {
+	    	for (i = 0; i < rows.length; i++) {
+				var currentRow = rows[i];
+				console.log(currentRow["username"])
+				var currentUsername = currentRow["username"];
+			 	usernames.push(currentUsername);				
+			}
+			return usernames
+		});
+		return result;
 		
 	}
 	
