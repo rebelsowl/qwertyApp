@@ -201,6 +201,20 @@ module.exports = class ContentManager {
 	
 
 	showEmails(){
+		var DBResult = DBHandler.showEmailsDB();
+		DBResult.then(function(emailObjects) {
+			emailObjects.forEach(function(Email) {
+			    $("#tablecontent1").append(
+			        "<tr>" +
+			          "<td>"+Email.emailGroup+"</td>" +
+			          "<td>"+Email.emailName+"</td>" +
+			        "</tr>"
+			    );
+			});
+			//Sort Table
+	  	  	$("#showEmailTable").tablesorter();
+			
+		});
 	}
 
 

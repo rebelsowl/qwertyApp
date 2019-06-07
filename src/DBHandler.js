@@ -367,7 +367,25 @@ module.exports = class DBHandler {
 	}
 
 	showEmailsDB(){
+	    //Create Email Objects
+		var emailObjects = [];
 		
+		// Perform a query
+		let $query = 'SELECT * FROM Email';
+		var result = connection.promise().query($query)
+	    .then( ([rows,fields]) => {
+			for (i = 0; i < rows.length; i++) {
+				var currentRow = rows[i];
+				var Email = new EmailClass(currentRow["mailgroup"],currentRow["mail"]);
+			 	emailObjects.push(Email);				
+			}
+			
+		
+			//Return completed Email object array
+			return emailObjects
+	    });
+					
+		return result;
 	}
 	
 
