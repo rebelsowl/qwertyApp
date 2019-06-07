@@ -209,7 +209,7 @@ function addContentManagerClicked() {
 }
 
 function deleteContentManagerClicked() {
-	
+	console.log("delete content Manager Clicked");
 }
 
 

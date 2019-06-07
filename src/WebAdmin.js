@@ -21,6 +21,14 @@ module.exports = class WebAdmin extends ContentManager{
 	
 
 	deleteContentManagerHelper(){
+		var DBResult =DBHandler.deleteContentManagerHelperDB();//deleteContentManagerHelperDB return usernames as a list.
+        DBResult.then(function(usernames) {
+            usernames.forEach(function(Username) {
+                $("#username1").append(
+                    "<option value="+Username+">"+Username+"</option>"
+                );
+            });
+        });
 		
 	}
 	
