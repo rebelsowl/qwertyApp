@@ -427,7 +427,16 @@ module.exports = class DBHandler {
 		
 	}
 	
-	deleteContentManagerDB(){
+	deleteContentManagerDB(delete_username){
+		//delete the content manager from db
+		console.log("this username was deleted : " + delete_username);
+		let $query = "DELETE FROM `Accounts` WHERE `username` = '" + delete_username + "' ";		
+		var result = connection.promise().query($query).catch( err => {
+			alert(err);
+			console.log(err);
+    	});
+		
+		return result;
 		
 	}
 	
