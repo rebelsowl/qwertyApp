@@ -487,11 +487,34 @@ module.exports = class DBHandler {
 			return result;
 	}
 	
-	deleteContentManagerDB(){
+	deleteContentManagerDB(delete_username){
+		//delete the content manager from db
+		console.log("this username was deleted : " + delete_username);
+		let $query = "DELETE FROM `Accounts` WHERE `username` = '" + delete_username + "' ";		
+		var result = connection.promise().query($query).catch( err => {
+			alert(err);
+			console.log(err);
+    	});
+		
+		return result;
 		
 	}
 	
 	deleteContentManagerHelperDB(){
+		var usernames = [];
+		// Perform a query
+		let $query = 'SELECT * FROM Accounts';
+		var result = connection.promise().query($query)
+	    .then( ([rows,fields]) => {
+	    	for (i = 0; i < rows.length; i++) {
+				var currentRow = rows[i];
+				console.log(currentRow["username"])
+				var currentUsername = currentRow["username"];
+			 	usernames.push(currentUsername);				
+			}
+			return usernames
+		});
+		return result;
 		
 	}
 	

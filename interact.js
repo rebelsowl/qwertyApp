@@ -224,7 +224,13 @@ function addContentManagerClicked() {
 }
 
 function deleteContentManagerClicked() {
+	console.log("delete content Manager Clicked");
+	var data = $('form').serializeArray().reduce(function(obj, item) {
+	    obj[item.name] = item.value;
+	    return obj;
+	}, {});
 	
+	user.deleteContentManager(data.username1);
 }
 
 
