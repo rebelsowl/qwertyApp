@@ -102,6 +102,8 @@ module.exports = class DBHandler {
 		// Perform a query
 		
 		let query = "INSERT INTO Courses (`course_code`, `course_credit`, `course_ects`, `course_name`, `course_prerequisite`, `mandatory/elective`, `active/inactive`, `semester`) ";
+		//This field is not mandatory
+		if (courseObject.coursePrequirities == "") courseObject.coursePrequirities = 'null';
 		query += `VALUES (${courseObject.courseCode}, ${courseObject.courseCredit}, ${courseObject.courseEcts}, '${courseObject.courseName}', ${courseObject.coursePrequirities}, ${courseObject.mandatory}, ${courseObject.active}, ${courseObject.semester})`;
 		console.log(query);
 		
@@ -118,15 +120,21 @@ module.exports = class DBHandler {
 	    }).then( ([rows,fields]) => {
 			console.log(rows);
 			let query = "INSERT INTO Instructors VALUES ";
-			courseObject.instructors.instructorName.forEach(function(row) {
-				query += `(${courseObject.courseCode}, '${row}'),`;
-			});
+			if(courseObject.instructors.instructorName.length == 0){
+				//DUMB QUERY TO NOT BREAK THE CALLBACK CHAIN
+				query='SHOW VARIABLES LIKE "%version%"  ';
+			} else {
+				courseObject.instructors.instructorName.forEach(function(row) {
+					query += `(${courseObject.courseCode}, '${row}'),`;
+				});
+			}
 			//Delete the last comma to prevent SQL Error
 			query = query.substring(0, query.length-1);
 		    return connection.promise().query(query);
 	    }).catch( err => {
 			alert(err);
 			console.log(err);
+			return 0;
     	});
 
 		return result;
@@ -188,17 +196,21 @@ module.exports = class DBHandler {
 		console.log(courseObject);
 		
 		let query = "DELETE FROM `Instructors` WHERE `course_code` = "+courseObject.courseCode;
-		
 		var result = connection.promise().query(query)
 	    .then( ([rows,fields]) => {
 			query = "DELETE FROM `Assistants` WHERE `course_code` = "+courseObject.courseCode;
 		    return connection.promise().query(query);
 	    }).then( ([rows,fields]) => {
-			query = "DELETE FROM `Courses` WHERE `course_code` = "+courseObject.courseCode;
-		    return connection.promise().query(query);
-	    }).then( ([rows,fields]) => {
-			query = "INSERT INTO Courses (`course_code`, `course_credit`, `course_ects`, `course_name`, `course_prerequisite`, `mandatory/elective`, `active/inactive`, `semester`) ";
-			query += `VALUES (${courseObject.courseCode}, ${courseObject.courseCredit}, ${courseObject.courseEcts}, '${courseObject.courseName}', ${courseObject.coursePrequirities}, ${courseObject.mandatory}, ${courseObject.active}, ${courseObject.semester})`;
+			query = "UPDATE Courses SET ";
+			query += `course_credit =  ${courseObject.courseCredit} , `;
+			query += `course_ects =  ${courseObject.courseEcts} , `;
+			query += `course_name =  '${courseObject.courseName}' , `;
+			query += `course_prerequisite =  ${courseObject.coursePrequirities} , `;
+			query += `\`mandatory/elective\` =  ${courseObject.mandatory} , `;
+			query += `\`active/inactive\` =  ${courseObject.active} , `;
+			query += `semester =  ${courseObject.semester} `;
+			query += " WHERE `course_code` = "+courseObject.courseCode;
+			console.log(query);
 		    return connection.promise().query(query);
 	    }).then( ([rows,fields]) => {
 			

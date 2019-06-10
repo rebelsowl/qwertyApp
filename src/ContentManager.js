@@ -52,6 +52,7 @@ module.exports = class ContentManager {
 		var courseObject = new CourseClass(courseName,courseCode,courseCredit,courseEcts,coursePrequirities,mandatory,active,semester,instructorsObject,assistantsObject);
 		var DBResult = DBHandler.addCourseDB(courseObject);
 		DBResult.then(function(returnedValue) {
+			console.log(returnedValue);
 			if(returnedValue = 1){
 		        $('#add-course-form')[0].reset();  
 				alert("Course Added Succesfully")

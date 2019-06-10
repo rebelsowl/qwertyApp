@@ -101,7 +101,8 @@
 	function addCourseFormControl(){
 		var empty = false;
 		$('input[type="text"]').each(function(){
-		   if($(this).val()==""){
+			console.log();
+		   if($(this).val()=="" && $(this)[0]["name"]!="coursePrequirities" && !$(this)[0]["name"].includes("assistants")){
 			   empty=true;
 			   $(this).focus(); //Focus on field
 			   return false;
@@ -125,11 +126,6 @@
 			 //Course cEcts numeric check
 			 if (!$.isNumeric($("#cEcts").val())){
 				 alert("Course Ects have to be numeric");
-				 empty = true;
-			 }
-			 //Course Pre numeric check
-			 if (!$.isNumeric($("#cPre").val())){
-				 alert("Course Prerequisite have to be 3 digit numeric");
 				 empty = true;
 			 }
 			 //Course code numeric check
