@@ -1,15 +1,365 @@
-          <div class="pane-form">			  
-			<form>
-			  <div class="form-group">
-			    <label>Username</label>
-			    <input name="username" type="input" class="form-control" placeholder="Username">
-			  </div>
-			  <div class="form-group">
-			    <label>Password</label>
-			    <input name="password" type="password" class="form-control" placeholder="Password">
-			  </div>
-			  <div class="form-actions">
-			    <button id="form-button" type="submit" class="btn btn-form btn-primary" onClick="render.addcontentmanager()">OK</button>
-			  </div>
-			</form>
-          </div>
+<style>
+	table {
+	  border-collapse: collapse;
+	}
+
+	table, th, td {
+	  border: 1px solid black;
+	}
+</style>
+
+<div class="pane-form">
+	<form id="publish-form">
+	  <div class="form-group">
+		<select id="semesterSelect" name="semesterSelect" class="form-control">
+			<option value="spring" >Spring</option>
+			<option value="fall" >Fall</option>
+		</select>
+	  </div>
+	</form>
+	
+<div id="course-schedule">
+<!-- wp:table {"align":"center"} -->
+<table id="year1" class="wp-block-table aligncenter" style="">
+<tbody>
+<tr>
+<td>First Year</td>
+<td><strong>Monday</strong></td>
+<td><strong>Tuesday</strong></td>
+<td><strong>Wednesday</strong></td>
+<td><strong>Thursday</strong></td>
+<td><strong>Friday</strong></td>
+</tr>
+<tr>
+<td><strong>08:45 - 09:30</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>09:45 - 10:30</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>10:45 - 11:30</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>11:45 - 12:30</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>13:30 - 14:15</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>14:30 - 15:15</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>15:30 - 16:15</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>16:30 - 17:15</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<!-- /wp:table -->
+<br>
+<!-- wp:table {"align":"center"} -->
+<table id="year2" class="wp-block-table aligncenter" style="">
+<tbody>
+<tr>
+<td>Second Year</td>
+<td><strong>Monday</strong></td>
+<td><strong>Tuesday</strong></td>
+<td><strong>Wednesday</strong></td>
+<td><strong>Thursday</strong></td>
+<td><strong>Friday</strong></td>
+</tr>
+<tr>
+<td><strong>08:45 - 09:30</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>09:45 - 10:30</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>10:45 - 11:30</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>11:45 - 12:30</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>13:30 - 14:15</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>14:30 - 15:15</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>15:30 - 16:15</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>16:30 - 17:15</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<!-- /wp:table -->
+<br>
+<!-- wp:table {"align":"center"} -->
+<table id="year3" class="wp-block-table aligncenter" style="">
+<tbody>
+<tr>
+<td>Third Year</td>
+<td><strong>Monday</strong></td>
+<td><strong>Tuesday</strong></td>
+<td><strong>Wednesday</strong></td>
+<td><strong>Thursday</strong></td>
+<td><strong>Friday</strong></td>
+</tr>
+<tr>
+<td><strong>08:45 - 09:30</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>09:45 - 10:30</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>10:45 - 11:30</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>11:45 - 12:30</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>13:30 - 14:15</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>14:30 - 15:15</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>15:30 - 16:15</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>16:30 - 17:15</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<!-- /wp:table -->
+<br>
+<!-- wp:table {"align":"center"} -->
+<table id="year4" class="wp-block-table aligncenter" style="">
+<tbody>
+<tr>
+<td>Fourth Year</td>
+<td><strong>Monday</strong></td>
+<td><strong>Tuesday</strong></td>
+<td><strong>Wednesday</strong></td>
+<td><strong>Thursday</strong></td>
+<td><strong>Friday</strong></td>
+</tr>
+<tr>
+<td><strong>08:45 - 09:30</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>09:45 - 10:30</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>10:45 - 11:30</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>11:45 - 12:30</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>13:30 - 14:15</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>14:30 - 15:15</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>15:30 - 16:15</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>16:30 - 17:15</strong></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<!-- /wp:table -->
+</div>
+<br>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-form btn-primary" id="publishBTN">Publish</button>
+  </div>
+
+</div>
+
+<script>
+	
+	user.publishCourseScheduleHelper("spring");
+	
+	//Button click listener
+	$("#publishBTN").click(function(e){
+		e.preventDefault();
+		//First control the form
+		publishCourseAndScheduleClicked();
+	});
+		
+	//Semester selection changed event
+	$("#semesterSelect").change(function() {
+		//Store the selected 
+        var selectedSemester = $(this).children("option:selected").val();	
+			
+		user.publishCourseScheduleHelper(selectedSemester);
+	});
+		
+</script>

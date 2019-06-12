@@ -23,6 +23,7 @@
     "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",
     "mysql2": "^1.6.5",
-    "tablesorter": "^2.31.1"
+    "tablesorter": "^2.31.1",
+    "wpapi": "^1.2.1"
   }
 }

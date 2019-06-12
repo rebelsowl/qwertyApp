@@ -11,6 +11,7 @@ module.exports = class Course {
 		this.semester=semester;
 		this.instructors=instructors;
 		this.assistants=assistants;
+		this.schedule=new Array();
 	}
 	
 }

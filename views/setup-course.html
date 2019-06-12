@@ -18,14 +18,14 @@
 			    <div class="form-group" id="hourWrapper">
     				<label>Choose Hour #1</label>
     				<select id="hours1"name="hours1" class="form-control">
-			    		<option value="845">8.45 - 9.30</option>
-			    		<option value="945">9.45 - 10.30</option>
-			    		<option value="1045">10.45 - 11.30</option>
-			    		<option value="1145">11.45 - 12.30</option>
-			    		<option value="1330">13.30 - 14.15</option>
-			    		<option value="1430">14.30 - 15.15</option>
-			    		<option value="1530">15.30 - 16.15</option>
-			    		<option value="1630">16.30 - 17.15</option>
+			    		<option value="1">8.45 - 9.30</option>
+			    		<option value="2">9.45 - 10.30</option>
+			    		<option value="3">10.45 - 11.30</option>
+			    		<option value="4">11.45 - 12.30</option>
+			    		<option value="5">13.30 - 14.15</option>
+			    		<option value="6">14.30 - 15.15</option>
+			    		<option value="7">15.30 - 16.15</option>
+			    		<option value="8">16.30 - 17.15</option>
 			    	</select>
 
  				 </div>
@@ -51,7 +51,7 @@
 	$(add_button_hour).click(function(e){ //on add input button click
 		e.preventDefault();
 		yi++; //text box increment
-		$(wrapperh).append('<label>Choose Hour #'+yi+'</label><select id="hours'+yi+'"name="hours'+yi+'" class="form-control"><option value="845">8.45 - 9.30</option><option value="945">9.45 - 10.30</option><option value="1045">10.45 - 11.30</option><option value="1145">11.45 - 12.30</option><option value="1330">13.30 - 14.15</option><option value="1430">14.30 - 15.15</option><option value="1530">15.30 - 16.15</option><option value="1630">16.30 - 17.15</option></select>'); //add input box
+		$(wrapperh).append('<label>Choose Hour #'+yi+'</label><select id="hours'+yi+'"name="hours'+yi+'" class="form-control"><option value="1">8.45 - 9.30</option><option value="2">9.45 - 10.30</option><option value="3">10.45 - 11.30</option><option value="4">11.45 - 12.30</option><option value="5">13.30 - 14.15</option><option value="6">14.30 - 15.15</option><option value="7">15.30 - 16.15</option><option value="8">16.30 - 17.15</option></select>'); //add input box
 	});	
 
 	user.setupWeeklyCourseScheduleHelper();
