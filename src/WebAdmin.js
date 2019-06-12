@@ -5,13 +5,48 @@ var DBHandler = new DBHandlerClass();
 //ContentManager Object
 var ContentManager = require('./ContentManager.js');
 
+//APIHandler Object
+var APIHandlerClass = require('./APIHandler.js');
+var APIHandler = new APIHandlerClass();
+
+
+
+
 module.exports = class WebAdmin extends ContentManager{
 	constructor(username){
 		super(username);
 	}
 	
 	publishCourseSchedule(){
+		APIHandler.publishScheduleAPI($("#course-schedule").html());
+	}
+	
+	publishCourseScheduleHelper(semester){
+		//First reset the the tables
+		let x = 0;
+		let y = 0;
 		
+		for(let years=1;years<5;years++){
+			$("#year"+years+" tr").each(function () {
+				x = $(this).index();
+			    $('td', this).each(function () {
+					y = $(this).index();
+					if(x != 0 && y != 0) $(this).html(" "); 
+			     })
+			})
+		}
+		
+		//Now add the new oness
+		var result = DBHandler.getScheduleDB(semester);
+		result.then(function(courseObjects) {
+			courseObjects.forEach(function(Course) {
+				Course.schedule.forEach(function(schedule) {
+					let year = Math.round(Course.semester/2);
+					//First Year Table
+					$("#year"+year+" tr").eq(schedule.courseTime)[0].cells[schedule.courseDay].innerHTML = "CENG"+schedule.courseCode;
+				});
+			});			
+		});
 	}
 	
 

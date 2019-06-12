@@ -167,7 +167,7 @@ function setupScheduleClicked(){
 }
 
 function publishCourseAndScheduleClicked() {
-	
+	user.publishCourseSchedule();
 }
 
 

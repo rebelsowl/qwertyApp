@@ -23,6 +23,8 @@ connection.connect(function(err) {
 var CourseClass = require('./Course.js');
 //Email object
 var EmailClass = require('./Email.js');
+//Email object
+var ScheduleClass = require('./Schedule.js');
 
 module.exports = class DBHandler {
 
@@ -529,9 +531,76 @@ module.exports = class DBHandler {
 		return result;
 		
 	}
-	
-	getScheduleDB(){
 		
+	getScheduleDB(semester){
+	    //Create Course Objects
+		var courseObjects = [];
+		
+		var modulo = 0
+		// If semester is fall semester % 2 have to be 1
+		if(semester == "fall") modulo = 1
+		
+		let $query = 'SELECT * FROM Courses WHERE ( semester % 2 ) = '+modulo;
+		let subquery = 'SELECT course_code FROM Courses WHERE ( semester % 2 ) = '+modulo;
+		var result = connection.promise().query($query)
+	    .then( ([rows,fields]) => {
+			for (i = 0; i < rows.length; i++) {
+				var currentRow = rows[i];
+				var Course = new CourseClass(currentRow["course_name"],currentRow["course_code"],currentRow["course_credit"],
+			 	currentRow["course_ects"],currentRow["course_prerequisite"],currentRow["mandatory/elective"],
+			 	currentRow["active/inactive"],currentRow["semester"],new Array(),new Array());
+			 	courseObjects.push(Course);				
+			}
+			
+			//Get Instructors of current course
+			$query = 'SELECT * FROM Instructors WHERE course_code IN ('+subquery+')';
+		    return connection.promise().query($query)
+	    })
+	    .then( ([rows,fields]) => {
+			//Add them to the corresponding object
+			rows.forEach(function(row) {
+				courseObjects.forEach(function(Course) {
+					if(row.course_code == Course.courseCode){
+						Course.instructors.push(row.instructor_name);
+					}
+				});
+			});
+			
+			//Get Instructors of current course
+			$query = 'SELECT * FROM Assistants WHERE course_code IN ('+subquery+')';
+			return connection.promise().query($query)
+	    })
+	    .then( ([rows,fields]) => {
+			//Add them to the corresponding object
+			rows.forEach(function(row) {
+				courseObjects.forEach(function(Course) {
+					if(row.course_code == Course.courseCode){
+						Course.assistants.push(row.assistant_name);
+					}
+				});
+			});
+			
+			//Get Schedules of current course
+			$query = 'SELECT * FROM Schedule WHERE course_code IN ('+subquery+')';
+			return connection.promise().query($query)
+	    })
+	    .then( ([rows,fields]) => {
+			//Add them to the corresponding object
+			rows.forEach(function(row) {
+				courseObjects.forEach(function(Course) {
+					if(row.course_code == Course.courseCode){
+						var Schedule = new ScheduleClass(row.course_code,row.course_day,row.course_time);
+						Course.schedule.push(Schedule);
+					}
+				});
+			});
+			
+			//return course array
+			return courseObjects
+	    });
+		
+					
+		return result;
 	}
 	
 
