@@ -189,11 +189,9 @@ module.exports = class ContentManager {
   			var a = new ScheduleClass(Number(courseCode),Number(day),Number(hour));
   			var DBResult = DBHandler.setupWeeklyCourseScheduleDB(a);
   			DBResult.then(function(returnedValue) {
-				if(returnedValue = 1){
-
+				console.log("returned : "+ returnedValue)
+				if(returnedValue == 1){
 		     	   $( "#content" ).load("views/setup-course.html");
-		     	     
-
 					alert("Course schedule set")
 				}
 			});

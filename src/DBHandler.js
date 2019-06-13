@@ -371,9 +371,10 @@ module.exports = class DBHandler {
 		
 		var result = connection.promise().query(query)
 	    .then( ([rows,fields]) => {
-		    return connection.promise().query(query);
+		    return(1);
 	    }).catch( err => {
 			alert(err);
+		    return(0);
 			console.log(err);
     	});
 
@@ -496,6 +497,7 @@ module.exports = class DBHandler {
 				return 1;
 		}).catch( err => {
 			alert(err);
+			return 0;
 			console.log(err);
     	});
 			return result;
