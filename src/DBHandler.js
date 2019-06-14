@@ -380,6 +380,26 @@ module.exports = class DBHandler {
 
 		return result;	
 	}
+	checkConflict(schedule){
+		let query= "SELECT s.course_code, course_day, course_time FROM Courses c, Schedule s WHERE s.course_day = "
+		query+= schedule.courseDay ;
+		query+="  AND s.course_time = "
+		query+=schedule.courseTime;
+		query+="  AND (SELECT semester FROM Courses d WHERE "
+		query+= schedule.courseCode;
+		query+="  = d.course_code) =c.semester AND c.course_code = s.course_code;"
+		console.log(query);
+		var result = connection.promise().query(query)
+	    .then( ([rows,fields]) => {
+	    	console.log(rows);
+		    return(rows);
+	    }).catch( err => {
+			//alert(err);
+		    return(111);
+			console.log(err);
+    	});
+	    return result;
+	}
 
 	showEmailsDB(){
 	    //Create Email Objects

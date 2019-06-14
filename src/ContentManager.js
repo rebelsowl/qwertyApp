@@ -187,14 +187,27 @@ module.exports = class ContentManager {
 		hours.forEach(function(hour) {
 			console.log(hour);
   			var a = new ScheduleClass(Number(courseCode),Number(day),Number(hour));
-  			var DBResult = DBHandler.setupWeeklyCourseScheduleDB(a);
-  			DBResult.then(function(returnedValue) {
-				console.log("returned : "+ returnedValue)
-				if(returnedValue == 1){
-		     	   $( "#content" ).load("views/setup-course.html");
-					alert("Course schedule set")
-				}
-			});
+
+  			var check= DBHandler.checkConflict(a);
+  			check.then(function(c){
+  				console.log('CCCCC  '+ c + '     c')
+  				if (c===[] || c=='' || c== undefined) {
+		  			var DBResult = DBHandler.setupWeeklyCourseScheduleDB(a);
+		  			DBResult.then(function(returnedValue) {
+						console.log("returned : "+ returnedValue)
+						if(returnedValue == 1){
+				     	   $( "#content" ).load("views/setup-course.html");
+							alert("Course schedule set")
+						}
+					});
+		  		}
+		  		else
+		  			alert('Two courses conflict at that time')
+
+		  	});
+
+
+
 		});
 	}
 	
