@@ -77,9 +77,11 @@ module.exports = class APIHandler {
 				    console.log( response.id );
 				})
 				
+				alert("Courses And Schedule Published Successfully")
 				return 1;
 			}).catch(function(error) {
 	  		  	console.log(error);
+				alert("Operation Failed")
 				return 0;
 			});
 			
