@@ -204,7 +204,11 @@ module.exports = class ContentManager {
 	}
 
 
-	importEmailList(){
+	importEmailList(emailGroup,emails){
+		emails.forEach(function (e) {
+			var EmailObject = new EmailClass(emailGroup,e);
+			var DBResult = DBHandler.addEmailDB(EmailObject);
+		});
 		
 	}
 		
