@@ -19,14 +19,14 @@ function addCourseClicked() {
 	    obj[item.name] = item.value;
 	    return obj;
 	}, {});
-	
+
 	//Make checkboxes 1 or 0
 	if(data.active=="on") data.active=1;
 	else data.active=0;
-	
+
 	if(data.mandatory=="on") data.mandatory=1;
 	else data.mandatory=0;
-	
+
 	//Get all instructors from inputs
 	instructorArray=[];
 	xi=1;
@@ -44,7 +44,7 @@ function addCourseClicked() {
 	}
 	user.addCourse(data.courseName,data.courseCode,data.courseCredit,data.courseEcts,data.coursePrequirities,
 		data.mandatory,data.active,data.semester,instructorArray,assistantArray);
-	
+
 }
 
 function editCourseClicked() {
@@ -52,14 +52,14 @@ function editCourseClicked() {
 	    obj[item.name] = item.value;
 	    return obj;
 	}, {});
-	
+
 	//Make checkboxes 1 or 0
 	if(data.active=="on") data.active=1;
 	else data.active=0;
-	
+
 	if(data.mandatory=="on") data.mandatory=1;
 	else data.mandatory=0;
-	
+
 	//Get all instructors from inputs
 	instructorArray=[];
 	xi=1;
@@ -80,7 +80,7 @@ function editCourseClicked() {
 	var courseObject = new CourseClass(data.courseName,data.courseCode,data.courseCredit,data.courseEcts,data.coursePrequirities,data.mandatory,data.active,data.semester,instructorsObject,assistantsObject);
 
 	user.editCourse(courseObject);
-	
+
 }
 
 
@@ -110,7 +110,7 @@ function selectCourseClicked() {
 	console.log(data.semester);
 	console.log(data.coursesl);
 	user.selectCoursesForSemester(data.coursesl,data.semester);
-	
+
 }
 
 function deleteCourseClicked() {
@@ -118,9 +118,9 @@ function deleteCourseClicked() {
 	    obj[item.name] = item.value;
 	    return obj;
 	}, {});
-	
+
 	user.deleteCourse(data.coursesl);
-	
+
 }
 
 function addMailClicked() {
@@ -137,7 +137,7 @@ function addMailClicked() {
 	console.log(data.group);
 	console.log(data.emailName);
 	user.addEmail(data.group,data.emailName);
-	
+
 }
 
 function setupScheduleClicked(){
@@ -177,7 +177,7 @@ function showEmailsClicked() {
 
 
 function importEmailsClicked() {
-	
+
 }
 
 
@@ -188,7 +188,7 @@ function editEmailClicked() {
 	}, {});
 	var emailObject = new EmailClass(data.emailgroup,data.newemail);
 	user.editEmail(emailObject,data.emailname);
-		
+
 }
 
 function deleteEmailClicked() {
@@ -205,11 +205,23 @@ function deleteEmailClicked() {
 	console.log(data.group);
 	console.log(data.email);
 	user.deleteEmail(data.email);
-	
+
 }
 
 function sendEventClicked() {
-	
+	var data = $('form').serializeArray().reduce(function(obj, item) {
+	    obj[item.name] = item.value;
+	    return obj;
+	}, {});
+	if(data.group=="instructors") data.group="instructors";
+	else if(data.group=="assistants") data.group="assistants";
+	else if(data.group=="first-grade") data.group="first-grade";
+	else if(data.group=="second-grade") data.group="second-grade";
+	else if(data.group=="third-grade") data.group="third-grade";
+	else if(data.group=="fourth-grade") data.group="fourth-grade";
+	console.log(data.group);
+	console.log(data.events);
+	user.sendEvent(data.events,data.group);
 }
 
 function addContentManagerClicked() {
@@ -229,7 +241,7 @@ function deleteContentManagerClicked() {
 	    obj[item.name] = item.value;
 	    return obj;
 	}, {});
-	
+
 	user.deleteContentManager(data.username1);
 }
 
@@ -247,6 +259,3 @@ function getAll( request ) {
     });
   });
 }
-
-
-

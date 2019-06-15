@@ -1,27 +1,35 @@
-          <div class="pane-form">			  
+          <div class="pane-form">
 			<form>
 			  <div class="form-group">
 			    <label>Event</label>
-			    <select name="event" class="form-control"> <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! BURAYI  DB YLE UYUMLU HALE GETIR                -->
-			    	<option selected value="Event 1">Event 1</option>
-			    	<option value="Event 2">Event 2</option>
+			    <select name="events" id="events" class="form-control"> <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! BURAYI  DB YLE UYUMLU HALE GETIR                -->
+            <option value="" disabled selected>Select Event</option>
 			    </select>
 			  </div>
 			  <div class="form-group">
 			    <label>Email List</label>
-			    <select name="emaillist" class="form-control"> <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! BURDA NAME CONVENTIONLARI KARARLASTIR          -->
-			    	<option selected value="Event 2">1st Grade</option>
-			    	<option value="Event 2">2st Grade</option>
-			    	<option value="Event 2">3st Grade</option>
-			    	<option value="Event 2">4st Grade</option>
-			    	<option value="Event 2">Asistants</option>
-			    	<option value="Event 2">Instructors</option>
-			    	<option value="Event 2">Yuksek lisans</option>
-			    	<option value="Event 2">Bı sey daha var dı</option>
+			    <select name="group" class="form-control"> <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! BURDA NAME CONVENTIONLARI KARARLASTIR          -->
+            <option value="" disabled selected>Select Email Group</option>
+            <option value="first-grade" id="first-grade">1st Grade</option>
+            <option value="second-grade" id="second-grade">2st Grade</option>
+			    	<option value="third-grade" id="third-grade">3st Grade</option>
+            <option value="fourth-grade" id="fourth-grade">4st Grade</option>
+            <option value="assistants" id="assistants">Asistants</option>
+			    	<option value="instructors" id="instructors">Instructors</option>
 			    </select>
 			  </div>
 			  <div class="form-actions">
-			    <button id="form-button" type="submit" class="btn btn-form btn-primary" onClick="render.sendEvent()">Send Event</button>
+			    <button id="sendEventButton" type="submit" class="btn btn-form btn-primary" onClick="render.sendEvent()">Send Event</button>
 			  </div>
 			</form>
           </div>
+          <script>
+          	user.sendEventHelper();
+
+          	$("#sendEventButton").click(function(e){
+          		e.preventDefault();
+          		sendEventClicked();
+          	});
+
+
+          </script>

@@ -9,45 +9,46 @@ var ContentManager = require('./ContentManager.js');
 var APIHandlerClass = require('./APIHandler.js');
 var APIHandler = new APIHandlerClass();
 
-
+//Event object
+var EventClass = require('./Event.js');
 
 
 module.exports = class WebAdmin extends ContentManager{
 	constructor(username){
 		super(username);
 	}
-	
+
 	publishCourseSchedule(){
 		APIHandler.publishScheduleAPI($("#course-schedule").html());
 	}
-	
+
 	publishCourseScheduleHelper(semester){
 		//First reset the the tables
 		let x = 0;
 		let y = 0;
-		
+
 		for(let years=1;years<5;years++){
 			$("#year"+years+" tr").each(function () {
 				x = $(this).index();
 			    $('td', this).each(function () {
 					y = $(this).index();
-					if(x != 0 && y != 0) $(this).html(" "); 
+					if(x != 0 && y != 0) $(this).html(" ");
 			     })
 			})
 		}
-		
+
 		//Now add the new oness
 		var result = DBHandler.getScheduleDB(semester);
 		result.then(function(courseObjects) {
 					console.log(courseObjects)
-			
+
 			courseObjects.forEach(function(Course) {
 				Course.schedule.forEach(function(schedule) {
 					let year = Math.round(Course.semester/2);
 					//First Year Table
 					$("#year"+year+" tr").eq(schedule.courseTime)[0].cells[schedule.courseDay].innerHTML = "CENG"+schedule.courseCode;
 				});
-			});	
+			});
 			return courseObjects;
 		}).then(function(courseObjects) {
 			//First Reset the DIV
@@ -92,21 +93,21 @@ module.exports = class WebAdmin extends ContentManager{
 					<p><strong>Status:</strong> ${courseStatus}</p>
 					<!-- /wp:paragraph -->
 					</div>`;
-					
+
 					$("#hiddenCourses").append(courseHTML);
-			});	
+			});
 			return courseObjects;
 		}).then(function(courseObjects) {
 			//first delete old courses div
 			$("#coursesDiv").html("");
-			
+
 			//now add new one
 			let appendCoursesDiv = `
 			<!-- wp:list -->
 			<ul>`;
 			courseObjects.forEach(function(Course) {
 				appendCoursesDiv += `<li><a href="/ceng-${Course.courseCode}/">CENG ${Course.courseCode}</a></li>`
-			});	
+			});
 			appendCoursesDiv +=`
 			</ul>
 			<!-- /wp:list -->`;
@@ -114,10 +115,10 @@ module.exports = class WebAdmin extends ContentManager{
 			$("#coursesDiv").append(appendCoursesDiv);
 			return 1;
 		});
-		
-		
+
+
 	}
-	
+
 
 	deleteContentManager(delete_username){
 		var DBResult = DBHandler.deleteContentManagerDB(delete_username);
@@ -125,11 +126,11 @@ module.exports = class WebAdmin extends ContentManager{
 			if(returnedValue = 1){
 				$( "#content" ).load("views/delete-content-manager.html");
 				alert("Content Manager Deleted");
-				
+
 			}
 		});
 	}
-	
+
 
 	deleteContentManagerHelper(){
 		var DBResult =DBHandler.deleteContentManagerHelperDB();//deleteContentManagerHelperDB return usernames as a list.
@@ -140,31 +141,31 @@ module.exports = class WebAdmin extends ContentManager{
                 );
             });
         });
-		
+
 	}
-	
+
 
 	addContentManager(username, password){
 		var DBResult = DBHandler.addContentManagerDB(username,password);
 		DBResult.then(function(returnedValue) {
 			if(returnedValue == 1){
-		        $('#add-content-form')[0].reset();  
+		        $('#add-content-form')[0].reset();
 				alert("Content Manager Added Succesfully")
 			}
 		});
 
 	}
-	
+
 
 	sendEventHelper(){
-		
+		APIHandler.getEventAPI();
 	}
-	
 
-	sendEvent(){
+
+	sendEvent(event,group){
 		
 	}
-	
-	
-	
+
+
+
 }
