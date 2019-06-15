@@ -163,7 +163,47 @@ module.exports = class WebAdmin extends ContentManager{
 
 
 	sendEvent(event,group){
-		
+		var DBResult = DBHandler.sendEventDB(group);
+		DBResult.then(function(emails) {
+				emails.forEach(function(emailAddress) {
+
+					var message = event;
+					var title = message.split("\n",1)[0];
+					var nodemailer = require('nodemailer');
+					var toEmail = emailAddress;
+					let transporter = nodemailer.createTransport({
+					service: 'gmail',
+					secure: false,
+					port: 25,
+					auth: {
+						user: 'iytecengmanagement@gmail.com',
+						pass: 'Webadmin12'
+					},
+					tls: {
+						rejectUnauthorized: false
+					}
+					});
+
+					let HelperOptions = {
+					from: '"web Admin" <iytecengmanagement@gmail.com',
+					to: toEmail,
+					subject: title,
+					text: message
+					};
+
+
+
+					transporter.sendMail(HelperOptions, (error, info) => {
+						if (error) {
+							return console.log(error);
+						}
+						console.log("The message was sent!");
+						console.log(info);
+					});
+
+
+				});
+		});
 	}
 
 
