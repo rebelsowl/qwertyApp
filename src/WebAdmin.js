@@ -12,6 +12,10 @@ var APIHandler = new APIHandlerClass();
 //Event object
 var EventClass = require('./Event.js');
 
+//NodeMailer
+var nodemailer = require('nodemailer');
+
+
 
 module.exports = class WebAdmin extends ContentManager{
 	constructor(username){
@@ -163,13 +167,13 @@ module.exports = class WebAdmin extends ContentManager{
 
 
 	sendEvent(event,group){
+		let alerted = false;
 		var DBResult = DBHandler.sendEventDB(group);
 		DBResult.then(function(emails) {
 				emails.forEach(function(emailAddress) {
 
 					var message = event;
 					var title = message.split("\n",1)[0];
-					var nodemailer = require('nodemailer');
 					var toEmail = emailAddress;
 					let transporter = nodemailer.createTransport({
 					service: 'gmail',
@@ -185,10 +189,10 @@ module.exports = class WebAdmin extends ContentManager{
 					});
 
 					let HelperOptions = {
-					from: '"web Admin" <iytecengmanagement@gmail.com',
+					from: '"Web Admin" <iytecengmanagement@gmail.com',
 					to: toEmail,
 					subject: title,
-					text: message
+					html: message
 					};
 
 
@@ -197,10 +201,15 @@ module.exports = class WebAdmin extends ContentManager{
 						if (error) {
 							return console.log(error);
 						}
+						if(!alerted){
+							alert("Mails successfully sent");
+							alerted = true;
+						}
 						console.log("The message was sent!");
 						console.log(info);
+						
 					});
-
+					
 
 				});
 		});

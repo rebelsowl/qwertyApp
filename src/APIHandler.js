@@ -100,7 +100,7 @@ module.exports = class APIHandler {
 			data.forEach(function(eventJSON){
 				var eventJSONParsed = $.parseJSON(JSON.stringify(eventJSON));
 				$("#events").append(
-					"<option value='"+(eventJSONParsed.title.rendered+"\n"+eventJSONParsed.content.rendered)+'" id="'+eventJSONParsed.title.rendered+"'>"+eventJSONParsed.title.rendered+"</option>"
+					"<option value='"+(eventJSONParsed.title.rendered+"\n"+eventJSONParsed.content.rendered)+"' id='"+eventJSONParsed.title.rendered+"'>"+eventJSONParsed.title.rendered+"</option>"
 				);
 				events.push(new EventClass(eventJSONParsed.title.rendered,eventJSONParsed.content.rendered));
 			});
