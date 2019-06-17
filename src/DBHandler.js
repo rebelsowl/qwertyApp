@@ -146,7 +146,6 @@ module.exports = class DBHandler {
 	editCourseHelperDB(courseCode){
 	    //Create Course Objects
 		var courseObjects = [];
-
 		// Perform a query
 		let $query = 'SELECT * FROM Courses';
 		var result = connection.promise().query($query)
@@ -196,7 +195,10 @@ module.exports = class DBHandler {
 	editCourseDB(courseObject){
 		//First delete old informations then add new infos
 		console.log(courseObject);
-
+		
+		//This field is not mandatory
+		if (courseObject.coursePrequirities == "") courseObject.coursePrequirities = 'null';
+		
 		let query = "DELETE FROM `Instructors` WHERE `course_code` = "+courseObject.courseCode;
 		var result = connection.promise().query(query)
 	    .then( ([rows,fields]) => {
@@ -244,6 +246,7 @@ module.exports = class DBHandler {
 	    }).catch( err => {
 			alert(err);
 			console.log(err);
+			return 0;
     	});
 
 		return result;

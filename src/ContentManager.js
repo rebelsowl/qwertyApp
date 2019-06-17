@@ -53,7 +53,7 @@ module.exports = class ContentManager {
 		var DBResult = DBHandler.addCourseDB(courseObject);
 		DBResult.then(function(returnedValue) {
 			console.log(returnedValue);
-			if(returnedValue = 1){
+			if(returnedValue != 0){
 		        $('#add-course-form')[0].reset();  
 				alert("Course Added Succesfully")
 			}
@@ -118,7 +118,7 @@ module.exports = class ContentManager {
 	editCourse(courseObject){
 		var DBResult = DBHandler.editCourseDB(courseObject);
 		DBResult.then(function(returnedValue) {
-			if(returnedValue = 1){
+			if(returnedValue != 0){
 		        $('#add-course-form')[0].reset();  
 				alert("Course Updated Succesfully")
 			}
@@ -196,8 +196,9 @@ module.exports = class ContentManager {
 		  			DBResult.then(function(returnedValue) {
 						console.log("returned : "+ returnedValue)
 						if(returnedValue == 1){
+ 						   alert("Course schedule set");
+							
 				     	   $( "#content" ).load("views/setup-course.html");
-							alert("Course schedule set")
 						}
 					});
 		  		}
