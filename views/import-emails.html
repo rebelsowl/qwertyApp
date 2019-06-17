@@ -24,21 +24,35 @@
   <script>
 	  var emails=[];
   $(document).ready(function(){
-	$('#viewfile').click(function () { 	
-		let rdr=new FileReader();
-		rdr.onload=function(e){
-			//get the rows into an array
-			var therows=e.target.result.split("\n");
-			for(var row=0;row< therows.length; row++){
-				var columns = therows[row].split(",");
-				for(var i=0; i< columns.length;i++){
-					var email=columns[i];
-					emails.push(email);
+	$('#viewfile').click(function (e) { 	
+		e.preventDefault();
+		if( importMailFormControl()){
+			let rdr=new FileReader();
+			rdr.onload=function(e){
+				console.log("hello");
+				//get the rows into an array
+				var therows=e.target.result.split("\n");
+				for(var row=0;row< therows.length; row++){
+					var columns = therows[row].split(",");
+					for(var i=0; i< columns.length;i++){
+						var email=columns[i];
+						emails.push(email);
+					}
 				}
+				importEmailsClicked(emails);
 			}
-			importEmailsClicked(emails);
+			rdr.readAsText($("#inputfile")[0].files[0]);
 		}
-		rdr.readAsText($("#inputfile")[0].files[0]);
 	});
   }); 
+function importMailFormControl(){
+		var fileName = $("#inputfile").val();
+
+		if(fileName) { // returns true if the string is not empty
+			return true;
+		} else { // no file was selected
+			alert("No file is selected");
+			return false
+		}
+}
   </script>

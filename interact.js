@@ -8,6 +8,9 @@ var AssistantClass = require('./src/Assistant.js');
 var CourseClass = require('./src/Course.js');
 //Email object
 var EmailClass = require('./src/Email.js')
+//Lodash
+var _ = require( 'lodash' );
+
 
 
 function showCoursesClicked() {
