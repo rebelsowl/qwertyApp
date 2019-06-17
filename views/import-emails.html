@@ -1,15 +1,45 @@
-          <div class="pane-form">			  
-			<form>
-			  <div class="form-group">
-			    <label>Username</label>
-			    <input name="username" type="input" class="form-control" placeholder="Username">
-			  </div>
-			  <div class="form-group">
-			    <label>Password</label>
-			    <input name="password" type="password" class="form-control" placeholder="Password">
-			  </div>
-			  <div class="form-actions">
-			    <button id="form-button" type="submit" class="btn btn-form btn-primary" onClick="render.addcontentmanager()">OK</button>
-			  </div>
-			</form>
-          </div>
+<div class="pane-form">			  
+	<form>
+	<div class="form-group">
+		<label>Email Group</label>
+		<select id="group" name="group"class="form-control">
+			<option value="instructors">Instructors</option>
+			<option value="assistants">Assistants</option>
+			<option value="first-grade">First Grade</option>
+			<option value="second-grade">Second Grade</option>
+			<option value="third-grade">Third Grade</option>
+			<option value="fourth-grade">Fourth Grade</option>
+</select>
+	  </div>
+	  <div class="form-group">
+		<label>Email List</label> <br>
+		<input type="file" accept=".csv" id="inputfile">
+	  </div>
+	  
+	  <div class="form-actions">
+		<input id="viewfile" type="button" class="btn btn-form btn-primary" value="Import" ></button>
+	  </div>
+	</form>
+  </div>
+  <script>
+	  var emails=[];
+  $(document).ready(function(){
+	$('#viewfile').click(function () { 	
+		let rdr=new FileReader();
+		rdr.onload=function(e){
+			console.log("hello");
+			//get the rows into an array
+			var therows=e.target.result.split("\n");
+			for(var row=0;row< therows.length; row++){
+				var columns = therows[row].split(",");
+				for(var i=0; i< columns.length;i++){
+					var email=columns[i];
+					emails.push(email);
+				}
+			}
+			importEmailsClicked(emails);
+		}
+		rdr.readAsText($("#inputfile")[0].files[0]);
+	});
+  }); 
+  </script>
