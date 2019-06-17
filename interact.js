@@ -177,9 +177,6 @@ function showEmailsClicked() {
 
 
 function importEmailsClicked(email) {
-<<<<<<< HEAD
-
-=======
 	var data = $('form').serializeArray().reduce(function(obj, item) {
 	    obj[item.name] = item.value;
 	    return obj;
@@ -191,7 +188,6 @@ function importEmailsClicked(email) {
 	else if(data.group=="third-grade") data.group="third-grade";
 	else if(data.group=="fourth-grade") data.group="fourth-grade";
 	user.importEmailList(data.group,emails);
->>>>>>> importemaillist
 }
 
 
