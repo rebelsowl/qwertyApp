@@ -205,11 +205,19 @@ module.exports = class ContentManager {
 
 
 	importEmailList(emailGroup,emails){
+		var rv;
 		emails.forEach(function (e) {
 			var EmailObject = new EmailClass(emailGroup,e);
 			var DBResult = DBHandler.addEmailDB(EmailObject);
+			DBResult.then(function(returnedValue) {
+				if(returnedValue = 1){
+						var rv= returnedValue;
+				}
+			});
 		});
-		
+			if(rv = 1){
+				alert("Email List is Added Succesfully")
+			}
 	}
 		
 
