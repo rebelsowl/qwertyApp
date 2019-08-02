@@ -4,10 +4,10 @@ var mysql = require('mysql2');
 
 // DB Credentials
 var connection = mysql.createConnection({
-    host     : '95.179.171.18',
-    user     : 'qwerty',
-    password :  'qwertyApp',
-    database : 'qwerty'
+    host     : //
+    user     : //
+    password :  //
+    database : //
 });
 
 // connect to mysql
